@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frequency Wave — Where Tech Meets Entertainment</title>
+  <meta name="description" content="Africa's premier Web3 & culture event experience. Immersive events that blend technology, blockchain, and entertainment." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" type="image/png" href="assets/logo.jpg" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.jpg" alt="Frequency Wave Logo" onerror="this.style.display='none'" />
+        <span class="nav-logo-text">Frequency Wave</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="sponsorship.html">Sponsorship</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <a href="contact.html" class="btn-nav desktop-only">Join The Wave</a>
+
+      <div class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html" onclick="closeMobileNav()">Home</a>
+    <a href="about.html" onclick="closeMobileNav()">About</a>
+    <a href="events.html" onclick="closeMobileNav()">Events</a>
+    <a href="sponsorship.html" onclick="closeMobileNav()">Sponsorship</a>
+    <a href="contact.html" onclick="closeMobileNav()">Contact</a>
+    <a href="contact.html" class="btn btn-cyan" onclick="closeMobileNav()">Join The Wave</a>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <canvas id="waveCanvas" class="hero-canvas"></canvas>
+    <div class="hero-grid"></div>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-glow hero-glow-3"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge fade-up">
+        <span></span>
+        Africa's Premier Web3 Event Experience
+      </div>
+
+      <h1 class="hero-title fade-up fade-up-delay-1">
+        Where Tech Meets<br />
+        <span class="gradient-text">Entertainment ⚡</span>
+      </h1>
+
+      <p class="hero-sub fade-up fade-up-delay-2">
+        Africa's premier Web3 &amp; culture event experience — creating immersive moments that inspire the next wave of innovation.
+      </p>
+
+      <div class="hero-ctas fade-up fade-up-delay-3">
+        <a href="contact.html" class="btn btn-primary">Join The Wave →</a>
+        <a href="#what-fw" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       WHAT IS FREQUENCY WAVE
+  ══════════════════════════════════════ -->
+  <section class="section what-fw" id="what-fw">
+    <div class="container text-center">
+      <span class="section-label">Who We Are</span>
+      <h2 class="section-title fade-up">
+        More Than An Event.<br />
+        <span class="gradient-text">A Movement.</span>
+      </h2>
+      <p class="what-intro fade-up">
+        Frequency Wave creates immersive experiences that blend technology, Web3, and entertainment — inspiring the next wave of African innovation and culture. We exist for builders, dreamers, and visionaries.
+      </p>
+
+      <div class="icon-blocks">
+        <div class="icon-block fade-up fade-up-delay-1">
+          <span class="icon-block-icon">🚀</span>
+          <h3>Innovation</h3>
+          <p>Bringing together the brightest minds in Web3, blockchain, and tech to co-create Africa's digital future.</p>
+        </div>
+        <div class="icon-block fade-up fade-up-delay-2">
+          <span class="icon-block-icon">⚡</span>
+          <h3>Energy</h3>
+          <p>Electric atmospheres charged with creativity, culture, and connection that you feel long after the event ends.</p>
+        </div>
+        <div class="icon-block fade-up fade-up-delay-3">
+          <span class="icon-block-icon">🌍</span>
+          <h3>Community</h3>
+          <p>Building a powerful network of founders, investors, creatives, and innovators across the African continent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       UPCOMING EVENT TEASER
+  ══════════════════════════════════════ -->
+  <section class="section event-teaser">
+    <div class="container text-center">
+      <span class="section-label">Upcoming Event</span>
+      <h2 class="section-title fade-up">
+        <span class="gradient-text">Experience The Wave</span>
+      </h2>
+      <p class="section-sub fade-up">Our first curated gathering is coming — and you don't want to miss it.</p>
+
+      <div class="event-card fade-up">
+        <div class="event-meta">
+          <span><span class="dot"></span> March 28, 2025</span>
+          <span><span class="dot"></span> Nairobi, Kenya</span>
+          <span><span class="dot"></span> Web3 Networking</span>
+          <span><span class="dot"></span> 50–70 Attendees</span>
+        </div>
+        <h3>The Wave Meet &amp; Greet ⚡</h3>
+        <p>
+          An intimate, curated Web3 networking event bringing together investors, VCs, Web3 founders, and cultural innovators in one room. Selected projects pitch. Real connections form. The future gets built.
+        </p>
+        <a href="events.html" class="btn btn-primary">Secure Your Spot →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       BRAND VALUES STRIP
+  ══════════════════════════════════════ -->
+  <div class="values-strip">
+    <div class="container">
+      <div class="values-scroll">
+        <div class="value-item">Innovation</div>
+        <div class="value-item">Energy</div>
+        <div class="value-item">Community</div>
+        <div class="value-item">Transparency</div>
+        <div class="value-item">Excellence</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/logo.jpg" alt="Frequency Wave" onerror="this.style.display='none'" />
+            <span class="gradient-text">Frequency Wave</span>
+          </div>
+          <p>Where Tech Meets Entertainment. Africa's premier Web3 &amp; culture event experience, inspiring the next wave of innovation.</p>
+          <div class="social-icons">
+            <a href="https://twitter.com/The_wave_Africa" target="_blank" rel="noopener" class="social-icon" title="X / Twitter">𝕏</a>
+            <a href="https://instagram.com/frequencywave.ke" target="_blank" rel="noopener" class="social-icon" title="Instagram">📷</a>
+            <a href="https://linktr.ee/frequencywave101" target="_blank" rel="noopener" class="social-icon" title="Linktree">🌿</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-heading">Navigate</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="sponsorship.html">Sponsorship</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Connect</div>
+          <ul class="footer-links">
+            <li><a href="https://twitter.com/The_wave_Africa" target="_blank" rel="noopener">X: @The_wave_Africa</a></li>
+            <li><a href="https://instagram.com/frequencywave.ke" target="_blank" rel="noopener">IG: @frequencywave.ke</a></li>
+            <li><a href="https://linktr.ee/frequencywave101" target="_blank" rel="noopener">Linktree: frequencywave101</a></li>
+            <li><a href="events.html">Upcoming Events</a></li>
+            <li><a href="sponsorship.html">Partner With Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Frequency Wave. All rights reserved.</p>
+        <div class="hashtags">
+          <span class="hashtag">#FrequencyWave</span>
+          <span class="hashtag">#TechMeetsEntertainment</span>
+          <span class="hashtag">#Web3Culture</span>
+          <span class="hashtag">#AfricaRising</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
