@@ -1,227 +1,290 @@
-/* ============================================
-   FREQUENCY WAVE — Main JavaScript
-   ============================================ */
+/* ============================================================
+   FREQUENCY WAVE — main.js
+   Nav overlay · Soundwave canvas · Scroll reveal
+   Events tabs · Forms · Active section tracking
+   ============================================================ */
 
 'use strict';
 
-// ── Navigation Scroll Behavior ──
-(function () {
-  const nav = document.getElementById('nav');
+/* ── Helpers ─────────────────────────────────────────────── */
+const qs  = (sel, ctx = document) => ctx.querySelector(sel);
+const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+/* ============================================================
+   1. NAV — scroll glass effect
+   ============================================================ */
+(function navScroll() {
+  const nav = qs('#nav');
   if (!nav) return;
-
-  const onScroll = () => {
-    if (window.scrollY > 40) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  const update = () => nav.classList.toggle('scrolled', window.scrollY > 50);
+  window.addEventListener('scroll', update, { passive: true });
+  update();
 })();
 
-// ── Mobile Navigation ──
-(function () {
-  const hamburger = document.getElementById('hamburger');
-  const mobileNav = document.getElementById('mobileNav');
-  if (!hamburger || !mobileNav) return;
+/* ============================================================
+   2. NAV OVERLAY — three-dot open / close
+   ============================================================ */
+(function navOverlay() {
+  const trigger  = qs('#navTrigger');
+  const overlay  = qs('#navOverlay');
+  const closeBtn = qs('#navClose');
+  if (!trigger || !overlay) return;
 
-  hamburger.addEventListener('click', () => {
-    const isOpen = mobileNav.classList.toggle('open');
-    hamburger.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+  function open() {
+    overlay.classList.add('open');
+    trigger.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    overlay.classList.remove('open');
+    trigger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  trigger.addEventListener('click', open);
+  closeBtn?.addEventListener('click', close);
+
+  // Close on overlay link click
+  qsa('.nav-overlay-links a', overlay).forEach(link => {
+    link.addEventListener('click', () => {
+      close();
+      // Smooth scroll handled by CSS scroll-behavior + href anchors
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) close();
   });
 })();
 
-function closeMobileNav() {
-  const mobileNav = document.getElementById('mobileNav');
-  const hamburger = document.getElementById('hamburger');
-  if (mobileNav) mobileNav.classList.remove('open');
-  if (hamburger) hamburger.classList.remove('open');
-  document.body.style.overflow = '';
-}
+/* ============================================================
+   3. ACTIVE SECTION — highlight overlay link for visible section
+   ============================================================ */
+(function activeSection() {
+  const sections = qsa('section[id], div[id]');
+  const links    = qsa('.nav-overlay-links a[data-section]');
+  if (!sections.length || !links.length) return;
 
-// ── Scroll-Triggered Fade Animations ──
-(function () {
-  const targets = document.querySelectorAll('.fade-up');
-  if (!targets.length) return;
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      links.forEach(a => {
+        a.classList.toggle('active', a.dataset.section === id);
       });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-  );
+    });
+  }, { threshold: 0.35 });
 
-  targets.forEach((el) => observer.observe(el));
+  sections.forEach(s => io.observe(s));
 })();
 
-// ── Soundwave Canvas Animation (Home Hero Only) ──
-(function () {
-  const canvas = document.getElementById('waveCanvas');
+/* ============================================================
+   4. SCROLL REVEAL — fade-up on .reveal elements
+   ============================================================ */
+(function scrollReveal() {
+  const targets = qsa('.reveal');
+  if (!targets.length) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  targets.forEach(el => io.observe(el));
+})();
+
+/* ============================================================
+   5. SOUNDWAVE CANVAS ANIMATION
+   ============================================================ */
+(function waveCanvas() {
+  const canvas = qs('#waveCanvas');
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
-  let animId;
-  let W, H;
+  let W, H, rafId;
 
   function resize() {
-    W = canvas.width = canvas.offsetWidth;
+    W = canvas.width  = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
   }
-
   window.addEventListener('resize', resize, { passive: true });
   resize();
 
-  // Wave config
+  // Wave definitions
   const waves = [
-    { freq: 0.012, amp: 38, speed: 0.016, color: 'rgba(107, 0, 245, 0.55)', phase: 0 },
-    { freq: 0.018, amp: 28, speed: 0.022, color: 'rgba(38, 91, 255, 0.45)', phase: 1.5 },
-    { freq: 0.010, amp: 50, speed: 0.011, color: 'rgba(0, 248, 255, 0.35)', phase: 3.1 },
-    { freq: 0.022, amp: 20, speed: 0.028, color: 'rgba(107, 0, 245, 0.3)', phase: 0.7 },
-    { freq: 0.014, amp: 34, speed: 0.018, color: 'rgba(0, 248, 255, 0.2)', phase: 2.5 },
+    { f: 0.011, a: 42,  s: 0.014, c: 'rgba(107,0,245,0.55)',  p: 0    },
+    { f: 0.017, a: 30,  s: 0.020, c: 'rgba(38,91,255,0.45)',   p: 1.4  },
+    { f: 0.009, a: 55,  s: 0.010, c: 'rgba(0,248,255,0.30)',   p: 3.0  },
+    { f: 0.021, a: 22,  s: 0.026, c: 'rgba(107,0,245,0.25)',   p: 0.6  },
+    { f: 0.013, a: 36,  s: 0.016, c: 'rgba(0,248,255,0.18)',   p: 2.3  },
+    { f: 0.008, a: 18,  s: 0.033, c: 'rgba(38,91,255,0.20)',   p: 4.1  },
   ];
 
   let t = 0;
 
-  function drawWave(wave) {
-    ctx.beginPath();
-    ctx.moveTo(0, H / 2);
-
-    for (let x = 0; x <= W; x += 2) {
-      const y = H / 2 + Math.sin(x * wave.freq + t * wave.speed + wave.phase) * wave.amp;
-      ctx.lineTo(x, y);
-    }
-
-    ctx.strokeStyle = wave.color;
-    ctx.lineWidth = 1.8;
-    ctx.stroke();
-  }
-
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    waves.forEach(drawWave);
-    t += 1;
-    animId = requestAnimationFrame(draw);
+
+    waves.forEach(w => {
+      ctx.beginPath();
+      ctx.moveTo(0, H / 2);
+      for (let x = 0; x <= W; x += 3) {
+        const y = H / 2 + Math.sin(x * w.f + t * w.s + w.p) * w.a;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = w.c;
+      ctx.lineWidth   = 1.6;
+      ctx.stroke();
+    });
+
+    t++;
+    rafId = requestAnimationFrame(draw);
   }
 
-  draw();
+  // Only animate while visible
+  const visObs = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      if (!rafId) draw();
+    } else {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }, { threshold: 0 });
 
-  // Pause when off-screen for performance
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        if (!animId) draw();
-      } else {
-        cancelAnimationFrame(animId);
-        animId = null;
-      }
-    },
-    { threshold: 0 }
-  );
-  observer.observe(canvas);
+  visObs.observe(canvas);
 })();
 
-// ── Active Nav Link Highlighting ──
-(function () {
-  const path = window.location.pathname.split('/').pop() || 'index.html';
-  const links = document.querySelectorAll('.nav-links a');
+/* ============================================================
+   6. EVENTS TABS
+   ============================================================ */
+(function eventsTabs() {
+  const tabs   = qsa('.events-tab');
+  const panels = qsa('.events-panel');
+  if (!tabs.length) return;
 
-  links.forEach((link) => {
-    const href = link.getAttribute('href');
-    if (href === path || (path === '' && href === 'index.html')) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+
+      tabs.forEach(t   => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      tab.classList.add('active');
+      const panel = qs(`#tab-${target}`);
+      if (panel) {
+        panel.classList.add('active');
+        // Re-trigger reveal animations for newly shown cards
+        qsa('.reveal', panel).forEach(el => {
+          el.classList.remove('in');
+          setTimeout(() => el.classList.add('in'), 80);
+        });
+      }
+    });
   });
 })();
 
-// ── Contact Form Handler ──
-(function () {
-  const form = document.getElementById('contactForm');
-  const success = document.getElementById('formSuccess');
+/* ============================================================
+   7. CONTACT FORM
+   ============================================================ */
+(function contactForm() {
+  const form    = qs('#contactForm');
+  const success = qs('#formSuccess');
   if (!form || !success) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
 
-    const name = form.querySelector('#name');
-    const email = form.querySelector('#email');
-    const message = form.querySelector('#message');
+    const name    = qs('#cName',    form);
+    const email   = qs('#cEmail',   form);
+    const message = qs('#cMessage', form);
+    let ok = true;
 
-    // Simple validation
-    let valid = true;
-
-    [name, email, message].forEach((field) => {
-      if (!field || !field.value.trim()) {
-        valid = false;
-        if (field) {
-          field.style.borderColor = 'rgba(255, 80, 80, 0.6)';
-          field.style.boxShadow = '0 0 0 3px rgba(255, 80, 80, 0.1)';
-          setTimeout(() => {
-            field.style.borderColor = '';
-            field.style.boxShadow = '';
-          }, 2500);
-        }
+    [name, email, message].forEach(f => {
+      if (!f?.value.trim()) {
+        ok = false;
+        highlight(f, 'error');
       }
     });
 
-    if (!valid) return;
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+      ok = false;
+      highlight(email, 'error');
+    }
 
-    // Email format check
-    const emailVal = email.value.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-      email.style.borderColor = 'rgba(255, 80, 80, 0.6)';
-      email.style.boxShadow = '0 0 0 3px rgba(255, 80, 80, 0.1)';
-      setTimeout(() => {
-        email.style.borderColor = '';
-        email.style.boxShadow = '';
-      }, 2500);
+    if (!ok) return;
+
+    // Simulate send
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+
+    setTimeout(() => {
+      form.style.display    = 'none';
+      success.style.display = 'block';
+    }, 900);
+  });
+
+  function highlight(el, type) {
+    if (!el) return;
+    el.style.borderColor = type === 'error'
+      ? 'rgba(255,80,80,0.6)'
+      : 'rgba(0,248,255,0.4)';
+    el.style.boxShadow = type === 'error'
+      ? '0 0 0 3px rgba(255,80,80,0.08)'
+      : '0 0 0 3px rgba(0,248,255,0.08)';
+    setTimeout(() => {
+      el.style.borderColor = '';
+      el.style.boxShadow   = '';
+    }, 2500);
+  }
+})();
+
+/* ============================================================
+   8. NEWSLETTER FORM
+   ============================================================ */
+(function newsletterForm() {
+  const form    = qs('#nlForm');
+  const success = qs('#nlSuccess');
+  if (!form || !success) return;
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const input = qs('#nlEmail', form);
+    if (!input?.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) {
+      input.style.borderColor = 'rgba(255,80,80,0.6)';
+      setTimeout(() => { input.style.borderColor = ''; }, 2200);
       return;
     }
 
-    // Simulate submission
-    const submitBtn = form.querySelector('button[type="submit"]');
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
+    const btn = form.querySelector('button');
+    if (btn) { btn.textContent = '…'; btn.disabled = true; }
 
     setTimeout(() => {
-      form.style.display = 'none';
+      form.style.display    = 'none';
       success.style.display = 'block';
-    }, 1000);
+    }, 700);
   });
 })();
 
-// ── Smooth Scroll for anchor links ──
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener('click', function (e) {
-    const target = document.querySelector(this.getAttribute('href'));
+/* ============================================================
+   9. SMOOTH SCROLL for anchor links (fallback for older Safari)
+   ============================================================ */
+(function smoothScroll() {
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const target = document.querySelector(a.getAttribute('href'));
     if (!target) return;
     e.preventDefault();
-    const navH = document.getElementById('nav')?.offsetHeight || 80;
-    const top = target.getBoundingClientRect().top + window.scrollY - navH - 20;
-    window.scrollTo({ top, behavior: 'smooth' });
-  });
-});
-
-// ── Cursor glow effect on interactive elements (subtle) ──
-(function () {
-  const glowEls = document.querySelectorAll('.btn, .btn-nav, .tier-card, .icon-block, .value-card, .event-card, .perk-card');
-
-  glowEls.forEach((el) => {
-    el.addEventListener('mousemove', (e) => {
-      const rect = el.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      el.style.setProperty('--mouse-x', `${x}%`);
-      el.style.setProperty('--mouse-y', `${y}%`);
+    const navH = qs('#nav')?.offsetHeight ?? 72;
+    window.scrollTo({
+      top: target.getBoundingClientRect().top + window.scrollY - navH - 12,
+      behavior: 'smooth',
     });
   });
 })();
