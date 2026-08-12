@@ -1,4 +1,4 @@
-/** Public homepage: Frequency Wave hero, featured event, DJs, sponsors, contact. */
+/** Public homepage: Frequency Wave hero, featured event, DJs, sponsors, contact, subscribe. */
 import { getFeaturedEvent, getPastEvents } from '@/lib/queries';
 import ContactSection from '@/components/site/ContactSection';
 import CountdownStrip from '@/components/site/CountdownStrip';
@@ -10,6 +10,7 @@ import MarqueeStrip from '@/components/site/MarqueeStrip';
 import Nav from '@/components/site/Nav';
 import PageBackdrop from '@/components/site/PageBackdrop';
 import Sponsorship from '@/components/site/Sponsorship';
+import SubscribeCard from '@/components/site/SubscribeCard';
 import UpcomingEvent from '@/components/site/UpcomingEvent';
 import WhoWeAre from '@/components/site/WhoWeAre';
 import { fmtDay, fmtMonth, fmtRange } from '@/components/site/format';
@@ -87,6 +88,7 @@ export default async function Home() {
         <Sponsorship />
         <FounderQuote />
         <ContactSection />
+        <SubscribeCard />
       </main>
       <Footer />
     </>

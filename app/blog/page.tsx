@@ -4,6 +4,7 @@ import { desc, eq } from 'drizzle-orm';
 import { db, posts } from '@/lib/db';
 import Nav from '@/components/site/Nav';
 import Footer from '@/components/site/Footer';
+import SubscribeCard from '@/components/site/SubscribeCard';
 
 export const dynamic = 'force-dynamic';
 
@@ -100,6 +101,7 @@ export default async function BlogPage() {
         </div>
       </section>
 
+      <SubscribeCard />
       <Footer />
     </div>
   );

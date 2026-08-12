@@ -8,6 +8,7 @@ import IcsButton from '@/components/site/IcsButton';
 import Nav from '@/components/site/Nav';
 import Reveal from '@/components/site/Reveal';
 import SectionHeading from '@/components/site/SectionHeading';
+import SubscribeCard from '@/components/site/SubscribeCard';
 import {
   fmtDateTimeLine,
   fmtRange,
@@ -300,6 +301,7 @@ export default async function EventPage({ params }: Props) {
           </div>
         </div>
       </main>
+      <SubscribeCard />
       <Footer />
     </>
   );

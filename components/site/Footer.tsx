@@ -3,7 +3,7 @@ import WaveCanvas from './WaveCanvas';
 
 export default function Footer() {
   return (
-    <footer className="relative z-20 border-t border-white/10 bg-[#040B24]/20">
+    <footer className="relative z-0 border-t border-white/10 bg-[#040B24]/20">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 -top-44 bottom-0 z-0 opacity-85 sm:-top-56"

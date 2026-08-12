@@ -1,5 +1,7 @@
 'use server';
 
+/** Public contact + newsletter actions. */
+
 import { db, subscribers, messages } from '@/lib/db';
 
 export type ActionResult = { ok: boolean; error?: string };
@@ -14,43 +16,15 @@ function cleanEmail(raw: unknown): string | null {
   return email;
 }
 
-const INTERESTS = [
-  'Attending',
-  'Sponsoring',
-  'Performing',
-  'Partnering',
-] as const;
-
-type Interest = (typeof INTERESTS)[number];
-
-/**
- * Hero lead form — subscribes the email (ignoring duplicates) and files a
- * lead message so it lands in the admin inbox.
- */
-export async function joinWave(formData: FormData): Promise<ActionResult> {
-  const name = String(formData.get('name') ?? '').trim();
+/** Newsletter card — email only. Duplicate signups count as success. */
+export async function subscribeToWave(formData: FormData): Promise<ActionResult> {
   const email = cleanEmail(formData.get('email'));
-  const rawInterest = String(formData.get('interest') ?? '').trim();
-
-  if (!name || name.length > 120) {
-    return { ok: false, error: 'Please tell us your first name.' };
-  }
   if (!email) {
     return { ok: false, error: 'Please enter a valid email address.' };
   }
-  if (!(INTERESTS as readonly string[]).includes(rawInterest)) {
-    return { ok: false, error: 'Please choose what you are interested in.' };
-  }
-  const interest = rawInterest as Interest;
 
   try {
     await db.insert(subscribers).values({ email }).onConflictDoNothing();
-    await db.insert(messages).values({
-      name,
-      email,
-      subject: 'Website Lead',
-      body: `Interest: ${interest}`,
-    });
     return { ok: true };
   } catch {
     return { ok: false, error: 'Something went wrong — please try again.' };

@@ -1,5 +1,6 @@
 'use client';
 
+/** Open contact layout: glass pill fields, no solid form blocks, sits above footer waves. */
 import { useActionState, type ReactNode } from 'react';
 import { sendMessage, type ActionResult } from '@/app/actions/public';
 import Reveal from './Reveal';
@@ -102,10 +103,10 @@ const INFO: {
 ];
 
 const inputClass =
-  'h-11 w-full rounded-none border border-white/15 bg-[#040B24] px-4 text-sm text-white placeholder:text-white/35 outline-none transition-colors focus:border-cyan';
+  'h-12 w-full rounded-full border border-white/20 bg-white/10 px-5 text-sm text-white placeholder:text-white/40 outline-none backdrop-blur-sm transition-colors focus:border-cyan';
 
 const labelClass =
-  'mb-1.5 block text-[0.65rem] uppercase tracking-widest text-white/40';
+  'mb-1.5 block font-mono text-[0.65rem] uppercase tracking-widest text-white/40';
 
 export default function ContactSection() {
   const [state, formAction, pending] = useActionState<
@@ -114,7 +115,11 @@ export default function ContactSection() {
   >(async (_prev, formData) => sendMessage(formData), null);
 
   return (
-    <section id="contact" aria-label="Contact" className="relative overflow-hidden py-24">
+    <section
+      id="contact"
+      aria-label="Contact"
+      className="relative z-20 overflow-visible py-24"
+    >
       <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-6">
         <Reveal>
           <SectionHeading
@@ -125,55 +130,37 @@ export default function ContactSection() {
         </Reveal>
 
         <Reveal className="mt-14">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-            {/* Info list */}
-            <div className="flex flex-col gap-7">
+          <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.2fr]">
+            <div className="flex flex-col gap-8">
+              <p className="text-sm leading-relaxed text-white/60">
+                Want to partner, sponsor, play, or just say hey? Drop a note —
+                we read every message.
+              </p>
               {INFO.map((item) => (
                 <div key={item.label} className="flex items-start gap-4">
                   <span className="mt-0.5 text-cyan">{item.icon}</span>
                   <div>
-                    <p className="text-[0.65rem] uppercase tracking-widest text-white/40">
+                    <p className="font-mono text-[0.65rem] uppercase tracking-widest text-white/40">
                       {item.label}
                     </p>
-                    <div className="mt-1 text-sm text-white/80">
-                      {item.value}
-                    </div>
+                    <div className="mt-1 text-sm text-white/80">{item.value}</div>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Form */}
             {state?.ok ? (
-              <div
-                role="status"
-                className="flex min-h-64 flex-col items-center justify-center gap-4 border border-white/10 p-8 text-center"
-              >
-                <svg
-                  aria-hidden="true"
-                  width="36"
-                  height="36"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-cyan"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="m8 12.5 3 3 5-6" />
-                </svg>
-          <p className="font-display text-2xl italic text-white">
-                  Message Received
+              <div role="status" className="flex flex-col justify-center gap-3 py-6">
+                <p className="font-display text-3xl italic text-white">
+                  Message received
                 </p>
                 <p className="text-sm text-white/60">
                   We&apos;ll be in touch within 24 hours.
                 </p>
               </div>
             ) : (
-              <form action={formAction} className="flex flex-col gap-4">
-                <div className="grid gap-4 sm:grid-cols-2">
+              <form action={formAction} className="flex flex-col gap-5">
+                <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label htmlFor="contact-name" className={labelClass}>
                       Name
@@ -205,21 +192,23 @@ export default function ContactSection() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="contact-subject" className={labelClass}>
-                    Subject
-                  </label>
-                  <select
-                    id="contact-subject"
-                    name="subject"
-                    defaultValue="Partnership"
-                    className={inputClass}
-                  >
-                    {SUBJECTS.map((s) => (
-                      <option key={s} value={s} className="bg-[#040B24]">
-                        {s}
-                      </option>
+                  <p className={labelClass}>Subject</p>
+                  <div className="flex flex-wrap gap-2">
+                    {SUBJECTS.map((s, i) => (
+                      <label key={s} className="cursor-pointer">
+                        <input
+                          type="radio"
+                          name="subject"
+                          value={s}
+                          defaultChecked={i === 0}
+                          className="peer sr-only"
+                        />
+                        <span className="inline-flex rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-xs text-white/70 transition-colors peer-checked:border-cyan peer-checked:bg-cyan/15 peer-checked:text-cyan peer-focus-visible:ring-2 peer-focus-visible:ring-cyan/50">
+                          {s}
+                        </span>
+                      </label>
                     ))}
-                  </select>
+                  </div>
                 </div>
                 <div>
                   <label htmlFor="contact-message" className={labelClass}>
@@ -232,7 +221,7 @@ export default function ContactSection() {
                     rows={5}
                     maxLength={5000}
                     placeholder="Tell us what you have in mind"
-                    className="w-full resize-y rounded-none border border-white/15 bg-[#040B24] px-4 py-3 text-sm text-white placeholder:text-white/35 outline-none transition-colors focus:border-cyan"
+                    className="w-full resize-y rounded-3xl border border-white/20 bg-white/10 px-5 py-3.5 text-sm text-white placeholder:text-white/40 outline-none backdrop-blur-sm transition-colors focus:border-cyan"
                   />
                 </div>
                 {state && !state.ok && (
@@ -243,7 +232,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={pending}
-                  className="btn-primary w-full disabled:opacity-60"
+                  className="btn-primary self-start disabled:opacity-60"
                 >
                   {pending ? 'Sending…' : 'Send Message'}
                 </button>
