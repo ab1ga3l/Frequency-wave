@@ -14,11 +14,19 @@ function partsUntil(targetMs: number): Parts {
   };
 }
 
+const pad = (n: number) => String(n).padStart(2, '0');
+
 /**
- * Live countdown to `targetISO`. Renders "--" placeholders until mounted
- * to avoid a hydration mismatch.
+ * Live inline countdown to `targetISO`, rendered as "22D : 08H : 45M : 12S".
+ * Shows "--" placeholders until mounted to avoid a hydration mismatch.
  */
-export default function Countdown({ targetISO }: { targetISO: string }) {
+export default function Countdown({
+  targetISO,
+  className = '',
+}: {
+  targetISO: string;
+  className?: string;
+}) {
   const [parts, setParts] = useState<Parts | null>(null);
 
   useEffect(() => {
@@ -32,32 +40,17 @@ export default function Countdown({ targetISO }: { targetISO: string }) {
     };
   }, [targetISO]);
 
-  const cells: { label: string; value: string }[] = [
-    { label: 'Days', value: parts ? String(parts.days).padStart(2, '0') : '--' },
-    { label: 'Hours', value: parts ? String(parts.hours).padStart(2, '0') : '--' },
-    { label: 'Minutes', value: parts ? String(parts.minutes).padStart(2, '0') : '--' },
-    { label: 'Seconds', value: parts ? String(parts.seconds).padStart(2, '0') : '--' },
-  ];
+  const text = parts
+    ? `${pad(parts.days)}D : ${pad(parts.hours)}H : ${pad(parts.minutes)}M : ${pad(parts.seconds)}S`
+    : '--D : --H : --M : --S';
 
   return (
-    <div
+    <span
       role="timer"
       aria-label="Countdown to event start"
-      className="grid grid-cols-4 gap-3 sm:gap-4"
+      className={`font-mono text-lg font-bold tabular-nums ${className}`}
     >
-      {cells.map((c) => (
-        <div
-          key={c.label}
-          className="neon-card flex flex-col items-center gap-1 px-3 py-4 sm:px-6 sm:py-5"
-        >
-          <span className="font-mono text-3xl font-bold text-cyan tabular-nums sm:text-5xl">
-            {c.value}
-          </span>
-          <span className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/50 sm:text-xs">
-            {c.label}
-          </span>
-        </div>
-      ))}
-    </div>
+      {text}
+    </span>
   );
 }

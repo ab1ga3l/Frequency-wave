@@ -63,8 +63,8 @@ export default function IcsButton({ event }: { event: IcsEvent }) {
   };
 
   return (
-    <button type="button" onClick={download} className="btn-outline text-sm">
-      📅 Add to Calendar
+    <button type="button" onClick={download} className="btn-outline">
+      Add to Calendar
     </button>
   );
 }

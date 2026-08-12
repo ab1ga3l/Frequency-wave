@@ -1,95 +1,94 @@
-import {
-  getActiveSponsors,
-  getEventBySlug,
-  getFeaturedEvent,
-  getPastEvents,
-  getUpcomingEvents,
-} from '@/lib/queries';
-import AboutSection from '@/components/site/AboutSection';
+/** Public homepage: Unplugged hero, featured event, program, DJs, sponsors, contact. */
+import { getFeaturedEvent, getPastEvents } from '@/lib/queries';
 import ContactSection from '@/components/site/ContactSection';
-import EventsSection from '@/components/site/EventsSection';
+import CountdownStrip from '@/components/site/CountdownStrip';
+import DjProfiles from '@/components/site/DjProfiles';
 import Footer from '@/components/site/Footer';
-import Hero, { type HeroEvent } from '@/components/site/Hero';
-import Marquee from '@/components/site/Marquee';
+import FounderQuote from '@/components/site/FounderQuote';
+import HeroBand from '@/components/site/HeroBand';
+import MarqueeStrip from '@/components/site/MarqueeStrip';
 import Nav from '@/components/site/Nav';
-import NewsletterSection from '@/components/site/NewsletterSection';
-import ProgramSection from '@/components/site/ProgramSection';
-import Reveal from '@/components/site/Reveal';
-import SponsorshipSection from '@/components/site/SponsorshipSection';
-import SponsorsStrip from '@/components/site/SponsorsStrip';
-import Voices from '@/components/site/Voices';
-import { fmtDateTimeLine, toEventCardData } from '@/components/site/format';
+import RunOfShow from '@/components/site/RunOfShow';
+import Sponsorship from '@/components/site/Sponsorship';
+import UpcomingEvent from '@/components/site/UpcomingEvent';
+import WaveBand from '@/components/site/WaveBand';
+import WhoWeAre from '@/components/site/WhoWeAre';
+import { fmtDay, fmtMonth, fmtRange } from '@/components/site/format';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  const [upcoming, past, featured, sponsors] = await Promise.all([
-    getUpcomingEvents(),
-    getPastEvents(),
+  const [featured, past] = await Promise.all([
     getFeaturedEvent(),
-    getActiveSponsors(),
+    getPastEvents(),
   ]);
 
-  const heroEvent: HeroEvent | null = featured
+  const featuredData = featured
     ? {
         slug: featured.slug,
         title: featured.title,
-        dateLine: fmtDateTimeLine(featured.startAt),
-        venueLine: [featured.venue, featured.city]
-          .filter(Boolean)
-          .join(', '),
+        description: featured.description,
+        dateRange: fmtRange(featured.startAt, featured.endAt),
+        venue: featured.venue,
+        venueLine: [featured.venue, featured.city].filter(Boolean).join(', '),
         startAtISO: featured.startAt.toISOString(),
         registerUrl: featured.registerUrl,
+        coverImage: featured.coverImage || '/images/unplugged-poster.jpg',
       }
     : null;
 
-  // Program: agenda of the featured upcoming event, else the latest past one.
-  const programSource = featured ?? past[0] ?? null;
-  const programDetail = programSource
-    ? await getEventBySlug(programSource.slug)
-    : null;
-  const programLabel = programSource
-    ? featured
-      ? `${programSource.title} — Full Program`
-      : `From ${programSource.title}`
-    : null;
+  const pastWaves = past.map((e) => ({
+    slug: e.slug,
+    title: e.title,
+    dateLabel: `${fmtMonth(e.startAt)} ${fmtDay(e.startAt)}`,
+  }));
 
   return (
     <>
       <Nav />
       <main>
-        <Hero event={heroEvent} />
-        <Marquee />
-        <AboutSection />
-
-        <section
-          id="events"
-          aria-label="Events"
-          className="relative mx-auto max-w-6xl px-5 py-24 sm:px-6 sm:py-32"
-        >
-          <Reveal>
-            <span className="eyebrow">Live Experiences</span>
-            <h2 className="mt-4 font-display text-3xl font-black uppercase tracking-tight sm:text-5xl">
-              Experience The <span className="g-text">Wave</span>
-            </h2>
-          </Reveal>
-          <div className="mt-12">
-            <EventsSection
-              upcoming={upcoming.map((e) => toEventCardData(e, false))}
-              past={past.map((e) => toEventCardData(e, true))}
-            />
-          </div>
-        </section>
-
-        <ProgramSection
-          agenda={programDetail?.agenda ?? []}
-          sourceLabel={programLabel}
+        <HeroBand event={featuredData} />
+        {featuredData && (
+          <CountdownStrip
+            event={{
+              title: featuredData.title,
+              dateRange: featuredData.dateRange,
+              venue: featuredData.venue,
+              startAtISO: featuredData.startAtISO,
+              registerUrl: featuredData.registerUrl,
+            }}
+          />
+        )}
+        <MarqueeStrip />
+        <WhoWeAre />
+        <WaveBand />
+        <UpcomingEvent
+          event={
+            featuredData
+              ? {
+                  slug: featuredData.slug,
+                  title: featuredData.title,
+                  description: featuredData.description,
+                  dateRange: featuredData.dateRange,
+                  venueLine: featuredData.venueLine,
+                  registerUrl: featuredData.registerUrl,
+                  coverImage: featuredData.coverImage,
+                }
+              : null
+          }
+          past={pastWaves}
         />
-        <SponsorshipSection />
-        <SponsorsStrip sponsors={sponsors} />
-        <Voices />
-        <NewsletterSection />
+        <WaveBand flip />
+        <RunOfShow />
+        <WaveBand />
+        <DjProfiles />
+        <WaveBand flip />
+        <Sponsorship />
+        <WaveBand />
+        <FounderQuote />
+        <WaveBand flip />
         <ContactSection />
+        <WaveBand />
       </main>
       <Footer />
     </>

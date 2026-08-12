@@ -20,9 +20,9 @@ export default function CopyEmailsButton({ emails }: { emails: string[] }) {
       type="button"
       onClick={copy}
       disabled={emails.length === 0}
-      className="rounded-lg border border-cyan/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-cyan transition-colors hover:bg-cyan/10 disabled:cursor-not-allowed disabled:opacity-40"
+      className="rounded-none border border-cyan/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-cyan transition-colors hover:bg-cyan/10 disabled:cursor-not-allowed disabled:opacity-40"
     >
-      {copied ? 'Copied ✓' : `Copy all emails (${emails.length})`}
+      {copied ? 'Copied' : `Copy all emails (${emails.length})`}
     </button>
   );
 }

@@ -2,8 +2,8 @@
 
 /* ════════════════════════════════════════════════════════════
    FREQUENCY WAVE — Design System
-   Dark · Neon · Web3-Native · African Tech-Entertainment
-   Palette: navy / electric blue / violet / cyan / gold
+   Matched to the Unplugged poster: cyan → blue → violet
+   Display: Cormorant Garamond (flowy event serif) · Poster: Bebas Neue (UNPLUGGED)
    ════════════════════════════════════════════════════════════ */
 
 @theme {
@@ -19,7 +19,8 @@
   --color-magenta: #e93cac;
 
   /* Fonts (variables injected by next/font in app/layout.tsx) */
-  --font-display: var(--font-montserrat), sans-serif;
+  --font-display: var(--font-cormorant), serif;
+  --font-poster: var(--font-bebas), sans-serif;
   --font-body: var(--font-inter), sans-serif;
   --font-mono: var(--font-space-mono), monospace;
 
@@ -30,6 +31,9 @@
   --animate-marquee: marquee 28s linear infinite;
   --animate-pulse-dot: pulse-dot 1.6s ease-in-out infinite;
   --animate-float: float 7s ease-in-out infinite;
+  --animate-glow: glow-breathe 3.2s ease-in-out infinite;
+  --animate-gradient-pan: gradient-pan 8s linear infinite;
+  --animate-ken: ken-burns 22s ease-in-out infinite alternate;
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -41,7 +45,35 @@
   }
   @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-18px); }
+    50% { transform: translateY(-14px); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes glow-breathe {
+    0%, 100% { opacity: 0.45; transform: scale(1); }
+    50% { opacity: 0.95; transform: scale(1.04); }
+  }
+  @keyframes gradient-pan {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  @keyframes ken-burns {
+    from { transform: scale(1) translate(0, 0); }
+    to { transform: scale(1.08) translate(-1.5%, 1%); }
+  }
+  @keyframes g-shift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+  @keyframes shine {
+    from { transform: translateX(-120%) skewX(-16deg); }
+    to { transform: translateX(220%) skewX(-16deg); }
+  }
+  @keyframes ring-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0, 248, 255, 0.45); }
+    50% { box-shadow: 0 0 0 10px rgba(0, 248, 255, 0); }
   }
 }
 
@@ -63,13 +95,18 @@ body {
 
 /* ── Shared utilities ── */
 
-/* Gradient text: violet → blue → cyan */
+/* Gradient text: cyan → blue → violet (same direction as the FW mark) */
 .g-text {
-  background: linear-gradient(90deg, #6b00f5 0%, #265bff 45%, #00f8ff 100%);
+  background: linear-gradient(90deg, #00f8ff 0%, #265bff 45%, #6b00f5 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+}
+
+/* Poster-style cyan → violet wash */
+.g-fill {
+  background: linear-gradient(90deg, #00f8ff 0%, #265bff 50%, #6b00f5 100%);
 }
 
 /* Section eyebrow label */
@@ -92,45 +129,62 @@ body {
   opacity: 0.7;
 }
 
-/* Primary CTA */
+/* Primary CTA — pill, cyan → violet fill */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 30px;
+  padding: 13px 34px;
   border-radius: 999px;
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
   color: #fff;
-  background: linear-gradient(135deg, #6b00f5, #265bff);
-  box-shadow: 0 8px 32px rgba(38, 91, 255, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  background: linear-gradient(90deg, #1a6bff 0%, #6b00f5 100%);
+  border: 0;
+  position: relative;
+  overflow: hidden;
+  transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 .btn-primary:hover {
-  transform: translateY(-2px);
   filter: brightness(1.12);
-  box-shadow: 0 12px 40px rgba(38, 91, 255, 0.55);
+  box-shadow: 0 0 24px rgba(107, 0, 245, 0.35);
+  transform: translateY(-1px);
+}
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: translateX(-120%) skewX(-16deg);
+}
+.btn-primary:hover::after {
+  animation: shine 0.7s ease;
 }
 
-/* Outline CTA */
+/* Outline CTA — pill with cyan → violet gradient border */
 .btn-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 30px;
+  padding: 13px 34px;
   border-radius: 999px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--color-cyan);
-  border: 1px solid rgba(0, 248, 255, 0.4);
-  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background:
+    linear-gradient(#040b24, #040b24) padding-box,
+    linear-gradient(90deg, #00f8ff, #6b00f5) border-box;
+  border: 1px solid transparent;
+  transition: color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 .btn-outline:hover {
-  background: rgba(0, 248, 255, 0.08);
-  border-color: var(--color-cyan);
-  transform: translateY(-2px);
+  color: var(--color-cyan);
+  box-shadow: 0 0 20px rgba(0, 248, 255, 0.18);
+  transform: translateY(-1px);
 }
 
 /* Neon card surface */
@@ -147,15 +201,85 @@ body {
   transform: translateY(-4px);
 }
 
-/* Scroll-reveal (paired with lib/use-reveal or IntersectionObserver client comp) */
+/* Scroll-reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(32px) scale(0.98);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .reveal.in {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+}
+
+/* Hero load-in */
+.hero-in {
+  opacity: 0;
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-in-d1 { animation-delay: 0.08s; }
+.hero-in-d2 { animation-delay: 0.18s; }
+.hero-in-d3 { animation-delay: 0.28s; }
+.hero-in-d4 { animation-delay: 0.38s; }
+.hero-in-d5 { animation-delay: 0.48s; }
+.hero-in-d6 { animation-delay: 0.58s; }
+.hero-in-d7 { animation-delay: 0.7s; }
+
+.anim-float { animation: float 6.5s ease-in-out infinite; }
+.anim-glow { animation: glow-breathe 3.2s ease-in-out infinite; }
+.anim-ken { animation: ken-burns 22s ease-in-out infinite alternate; }
+.anim-ring { animation: ring-pulse 2.8s ease-out infinite; }
+
+.g-text-anim {
+  background: linear-gradient(90deg, #00f8ff 0%, #265bff 40%, #6b00f5 70%, #00f8ff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: g-shift 4s ease infinite alternate;
+}
+
+.anim-gradient-bar {
+  background: linear-gradient(90deg, #00b8d4, #265bff, #6b00f5, #00b8d4);
+  background-size: 200% 100%;
+  animation: gradient-pan 8s linear infinite;
+}
+
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-zoom:hover img {
+  transform: scale(1.07);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-in,
+  .anim-float,
+  .anim-glow,
+  .anim-ken,
+  .anim-ring,
+  .g-text-anim,
+  .anim-gradient-bar,
+  .marquee-track,
+  .btn-primary:hover::after {
+    animation: none !important;
+  }
+  .hero-in { opacity: 1; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .img-zoom:hover img { transform: none; }
 }
 
 /* Thin custom scrollbar for dark UI */

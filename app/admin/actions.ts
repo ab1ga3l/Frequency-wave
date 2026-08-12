@@ -11,6 +11,7 @@ import {
   sponsors,
   subscribers,
   messages,
+  posts,
 } from '@/lib/db';
 import { destroySession, requireAdmin } from '@/lib/auth';
 import type { NewEvent } from '@/lib/db/schema';
@@ -381,4 +382,146 @@ export async function deleteMessage(formData: FormData): Promise<void> {
   if (!id) return;
   await db.delete(messages).where(eq(messages.id, id));
   refresh();
+}
+
+/* ─── blog posts ──────────────────────────────────────────── */
+
+const POST_STATUSES = ['draft', 'published'] as const;
+type PostStatus = (typeof POST_STATUSES)[number];
+
+function refreshBlog() {
+  revalidatePath('/admin', 'layout');
+  revalidatePath('/blog', 'layout');
+  revalidatePath('/');
+}
+
+type PostFormValues = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  body: string;
+  coverImage: string | null;
+  tags: string[];
+  status: PostStatus;
+  publishedAt: Date | null;
+};
+
+/** Parse + validate the shared blog post form fields. */
+function parsePostForm(
+  formData: FormData
+): { values: PostFormValues } | { error: string } {
+  const title = str(formData, 'title');
+  const slug = str(formData, 'slug');
+  const statusRaw = str(formData, 'status');
+  const publishedRaw = str(formData, 'publishedAt');
+
+  if (!title) return { error: 'Title is required.' };
+  if (!slug) return { error: 'Slug is required.' };
+  if (!SLUG_RE.test(slug))
+    return { error: 'Slug must be kebab-case: lowercase letters, numbers and dashes (e.g. "frequency-wave-rides-ethsafari").' };
+
+  const status: PostStatus = (POST_STATUSES as readonly string[]).includes(statusRaw)
+    ? (statusRaw as PostStatus)
+    : 'draft';
+
+  let publishedAt: Date | null = null;
+  if (publishedRaw) {
+    publishedAt = new Date(publishedRaw);
+    if (Number.isNaN(publishedAt.getTime()))
+      return { error: 'Published date is not a valid date.' };
+  }
+  // First publish with an empty date → stamp it now.
+  if (status === 'published' && !publishedAt) publishedAt = new Date();
+
+  return {
+    values: {
+      title,
+      slug,
+      excerpt: str(formData, 'excerpt'),
+      body: str(formData, 'body'),
+      coverImage: optional(formData, 'coverImage'),
+      tags: list(formData, 'tags'),
+      status,
+      publishedAt,
+    },
+  };
+}
+
+async function postSlugTaken(slug: string, excludeId?: string): Promise<boolean> {
+  const rows = await db
+    .select({ id: posts.id })
+    .from(posts)
+    .where(
+      excludeId
+        ? and(eq(posts.slug, slug), ne(posts.id, excludeId))
+        : eq(posts.slug, slug)
+    )
+    .limit(1);
+  return rows.length > 0;
+}
+
+export async function createPost(
+  _prev: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  await requireAdmin();
+  const parsed = parsePostForm(formData);
+  if ('error' in parsed) return { error: parsed.error };
+  if (await postSlugTaken(parsed.values.slug))
+    return { error: `A post with slug "${parsed.values.slug}" already exists — pick another.` };
+
+  const [row] = await db.insert(posts).values(parsed.values).returning({ id: posts.id });
+  refreshBlog();
+  redirect(`/admin/blog/${row.id}?created=1`);
+}
+
+export async function updatePost(
+  id: string,
+  _prev: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  await requireAdmin();
+  const parsed = parsePostForm(formData);
+  if ('error' in parsed) return { error: parsed.error };
+  if (await postSlugTaken(parsed.values.slug, id))
+    return { error: `A post with slug "${parsed.values.slug}" already exists — pick another.` };
+
+  await db
+    .update(posts)
+    .set({ ...parsed.values, updatedAt: new Date() })
+    .where(eq(posts.id, id));
+  refreshBlog();
+  return { ok: true };
+}
+
+export async function deletePost(formData: FormData): Promise<void> {
+  await requireAdmin();
+  const id = str(formData, 'id');
+  if (!id) return;
+  await db.delete(posts).where(eq(posts.id, id));
+  refreshBlog();
+}
+
+export async function setPostStatus(formData: FormData): Promise<void> {
+  await requireAdmin();
+  const id = str(formData, 'id');
+  const statusRaw = str(formData, 'status');
+  if (!id || !(POST_STATUSES as readonly string[]).includes(statusRaw)) return;
+  const status = statusRaw as PostStatus;
+
+  const patch: { status: PostStatus; updatedAt: Date; publishedAt?: Date } = {
+    status,
+    updatedAt: new Date(),
+  };
+  if (status === 'published') {
+    const [existing] = await db
+      .select({ publishedAt: posts.publishedAt })
+      .from(posts)
+      .where(eq(posts.id, id))
+      .limit(1);
+    if (existing && !existing.publishedAt) patch.publishedAt = new Date();
+  }
+
+  await db.update(posts).set(patch).where(eq(posts.id, id));
+  refreshBlog();
 }

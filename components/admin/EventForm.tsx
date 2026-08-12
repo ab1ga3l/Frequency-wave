@@ -4,7 +4,13 @@ import { useActionState, useState } from 'react';
 import type { Event } from '@/lib/db/schema';
 import type { ActionState } from '@/app/admin/actions';
 import { slugify, toInputValue } from '@/components/admin/format';
-import { inputCls, labelCls, selectCls } from '@/components/admin/ui';
+import {
+  errorBannerCls,
+  inputCls,
+  labelCls,
+  okBannerCls,
+  selectCls,
+} from '@/components/admin/ui';
 
 export default function EventForm({
   action,
@@ -23,16 +29,8 @@ export default function EventForm({
 
   return (
     <form action={formAction} className="space-y-5">
-      {state?.error && (
-        <div className="rounded-lg border border-magenta/50 bg-magenta/10 px-4 py-3 text-sm text-magenta">
-          ⚠ {state.error}
-        </div>
-      )}
-      {state?.ok && (
-        <div className="rounded-lg border border-cyan/40 bg-cyan/10 px-4 py-3 font-mono text-xs uppercase tracking-widest text-cyan">
-          Saved ✓
-        </div>
-      )}
+      {state?.error && <div className={errorBannerCls}>{state.error}</div>}
+      {state?.ok && <div className={okBannerCls}>Saved</div>}
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
@@ -213,13 +211,13 @@ export default function EventForm({
             defaultChecked={event?.featured ?? false}
             className="h-4 w-4 accent-[#00f8ff]"
           />
-          Featured ★
+          Featured
         </label>
       </div>
 
       <div className="pt-2">
         <button type="submit" disabled={pending} className="btn-primary disabled:opacity-60">
-          {pending ? 'Saving…' : submitLabel}
+          {pending ? 'Saving' : submitLabel}
         </button>
       </div>
     </form>

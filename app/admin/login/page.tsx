@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { createSession, getSession, verifyCredentials } from '@/lib/auth';
-import { inputCls, labelCls } from '@/components/admin/ui';
+import { cardCls, errorBannerCls, inputCls, labelCls } from '@/components/admin/ui';
+import LogoMark from '@/components/site/LogoMark';
 
 export const metadata: Metadata = {
   title: 'Sign In — Frequency Wave Mission Control',
@@ -26,20 +27,34 @@ export default async function LoginPage({
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(ellipse_at_top,#0a1340_0%,#040b24_55%,#02061a_100%)] px-4">
-      <div className="neon-card w-full max-w-md p-8 sm:p-10 hover:transform-none">
+    <main className="relative flex min-h-screen items-center justify-center bg-[#030818] px-4">
+      {/* Faint fixed grid backdrop */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(0,248,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(107,0,245,0.05) 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
+        }}
+      />
+      <div className={`${cardCls} relative w-full max-w-md p-8 sm:p-10`}>
         <div className="mb-8 text-center">
-          <p className="font-display text-xl font-extrabold tracking-wide">
-            ⚡ FREQUENCY WAVE
+          <p className="flex items-center justify-center gap-2.5 font-display text-3xl italic tracking-wide">
+            <LogoMark className="h-8 w-auto" />
+            <span>
+              <span className="text-cyan">Frequency</span>{' '}
+              <span className="text-white">Wave</span>
+            </span>
           </p>
-          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.3em] text-cyan/80">
+          <p className="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.3em] text-cyan/80">
             Mission Control
           </p>
         </div>
 
         {error && (
-          <div className="mb-5 rounded-lg border border-magenta/50 bg-magenta/10 px-4 py-3 text-sm text-magenta">
-            ⚠ Invalid email or password. Try again.
+          <div className={`${errorBannerCls} mb-5`}>
+            Invalid email or password. Try again.
           </div>
         )}
 
@@ -65,7 +80,7 @@ export default async function LoginPage({
               required
               autoComplete="current-password"
               className={inputCls}
-              placeholder="••••••••"
+              placeholder="Password"
             />
           </div>
           <button type="submit" className="btn-primary w-full">
@@ -73,7 +88,7 @@ export default async function LoginPage({
           </button>
         </form>
 
-        <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-widest text-white/30">
+        <p className="mt-6 text-center font-mono text-[0.62rem] uppercase tracking-[0.25em] text-white/30">
           Authorized crew only
         </p>
       </div>

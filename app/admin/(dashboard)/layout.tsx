@@ -23,9 +23,19 @@ export default async function DashboardLayout({
     .where(eq(messages.read, false));
 
   return (
-    <div className="min-h-screen bg-navy">
+    <div className="min-h-screen bg-[#030818]">
+      {/* Faint fixed grid backdrop */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(0,248,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(107,0,245,0.05) 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
+        }}
+      />
       <Sidebar unread={unread} />
-      <main className="px-4 py-6 sm:px-8 sm:py-10 md:ml-60">
+      <main className="relative z-10 px-4 py-6 sm:px-8 sm:py-10 md:ml-60">
         <div className="mx-auto w-full max-w-6xl">{children}</div>
       </main>
     </div>

@@ -2,7 +2,13 @@
 
 import { useActionState } from 'react';
 import { createSponsor, type ActionState } from '@/app/admin/actions';
-import { inputCls, labelCls, selectCls } from '@/components/admin/ui';
+import {
+  errorBannerCls,
+  inputCls,
+  labelCls,
+  okBannerCls,
+  selectCls,
+} from '@/components/admin/ui';
 
 const TIERS = ['platinum', 'gold', 'silver', 'bronze', 'partner'] as const;
 
@@ -14,16 +20,8 @@ export default function SponsorCreateForm() {
 
   return (
     <form action={formAction} className="space-y-4">
-      {state?.error && (
-        <div className="rounded-lg border border-magenta/50 bg-magenta/10 px-4 py-3 text-sm text-magenta">
-          ⚠ {state.error}
-        </div>
-      )}
-      {state?.ok && (
-        <div className="rounded-lg border border-cyan/40 bg-cyan/10 px-4 py-3 font-mono text-xs uppercase tracking-widest text-cyan">
-          Sponsor added ✓
-        </div>
-      )}
+      {state?.error && <div className={errorBannerCls}>{state.error}</div>}
+      {state?.ok && <div className={okBannerCls}>Sponsor added</div>}
 
       <div className="grid gap-4 sm:grid-cols-3">
         <div>
@@ -61,7 +59,7 @@ export default function SponsorCreateForm() {
       </div>
 
       <button type="submit" disabled={pending} className="btn-primary disabled:opacity-60">
-        {pending ? 'Adding…' : '+ Add Sponsor'}
+        {pending ? 'Adding' : 'Add Sponsor'}
       </button>
     </form>
   );

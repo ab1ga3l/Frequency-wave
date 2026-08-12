@@ -13,7 +13,15 @@ import {
 } from '@/app/admin/actions';
 import EventForm from '@/components/admin/EventForm';
 import ConfirmButton from '@/components/admin/ConfirmButton';
-import { cardCls, dangerBtnCls, inputCls, labelCls, smallBtnCls } from '@/components/admin/ui';
+import {
+  cardCls,
+  dangerBtnCls,
+  inputCls,
+  labelCls,
+  microLabelCls,
+  okBannerCls,
+  smallBtnCls,
+} from '@/components/admin/ui';
 
 export default async function EditEventPage({
   params,
@@ -50,41 +58,43 @@ export default async function EditEventPage({
           href="/admin/events"
           className="font-mono text-xs uppercase tracking-widest text-white/45 hover:text-cyan"
         >
-          ← Events
+          Back to Events
         </Link>
         <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="eyebrow">Edit Event</p>
-            <h1 className="mt-2 font-display text-3xl font-extrabold">{event.title}</h1>
+            <p className={microLabelCls}>Edit Event</p>
+            <h1 className="mt-2 font-display text-2xl font-extrabold uppercase tracking-wide sm:text-3xl">
+              {event.title}
+            </h1>
             <p className="mt-1 font-mono text-xs text-white/40">/{event.slug}</p>
           </div>
           {event.status === 'published' && (
             <Link
               href={`/events/${event.slug}`}
               target="_blank"
-              className="rounded-lg border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-widest text-white/70 transition-colors hover:border-cyan/50 hover:text-cyan"
+              className="rounded-none border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-widest text-white/70 transition-colors hover:border-cyan/50 hover:text-cyan"
             >
-              View Live ↗
+              View Live
             </Link>
           )}
         </div>
       </header>
 
       {created && (
-        <div className="rounded-lg border border-cyan/40 bg-cyan/10 px-4 py-3 font-mono text-xs uppercase tracking-widest text-cyan">
-          Event created ✓ — now add its agenda and ticket tiers below.
+        <div className={okBannerCls}>
+          Event created — now add its agenda and ticket tiers below.
         </div>
       )}
 
       {/* ── Event fields ── */}
       <section className={cardCls + ' p-6 sm:p-8'}>
-        <h2 className="eyebrow mb-6">Event Details</h2>
+        <h2 className={`${microLabelCls} mb-6`}>Event Details</h2>
         <EventForm action={update} event={event} submitLabel="Save Changes" />
       </section>
 
       {/* ── Agenda ── */}
       <section className={cardCls + ' p-6 sm:p-8'}>
-        <h2 className="eyebrow mb-2">Agenda</h2>
+        <h2 className={`${microLabelCls} mb-2`}>Agenda</h2>
         <p className="mb-6 text-xs text-white/45">
           The run of show. Lower sort numbers appear first.
         </p>
@@ -97,7 +107,7 @@ export default async function EditEventPage({
               <li key={item.id}>
                 <form
                   action={updateAgendaItem}
-                  className="grid gap-3 rounded-xl border border-white/8 bg-navy-mid/60 p-4 sm:grid-cols-[90px_60px_1fr]"
+                  className="grid gap-3 rounded-none border border-white/10 bg-[#040B24]/60 p-4 sm:grid-cols-[90px_60px_1fr]"
                 >
                   <input type="hidden" name="id" value={item.id} />
                   <div>
@@ -192,7 +202,7 @@ export default async function EditEventPage({
 
       {/* ── Ticket tiers ── */}
       <section className={cardCls + ' p-6 sm:p-8'}>
-        <h2 className="eyebrow mb-2">Ticket Tiers</h2>
+        <h2 className={`${microLabelCls} mb-2`}>Ticket Tiers</h2>
         <p className="mb-6 text-xs text-white/45">
           Perks are comma-separated. Lower sort numbers appear first.
         </p>
@@ -205,7 +215,7 @@ export default async function EditEventPage({
               <li key={tier.id}>
                 <form
                   action={updateTicketTier}
-                  className="space-y-3 rounded-xl border border-white/8 bg-navy-mid/60 p-4"
+                  className="space-y-3 rounded-none border border-white/10 bg-[#040B24]/60 p-4"
                 >
                   <input type="hidden" name="id" value={tier.id} />
                   <div className="grid gap-3 sm:grid-cols-[1fr_140px_60px]">

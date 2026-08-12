@@ -3,16 +3,27 @@ import { db, sponsors } from '@/lib/db';
 import { deleteSponsor, toggleSponsorActive, updateSponsor } from '@/app/admin/actions';
 import ConfirmButton from '@/components/admin/ConfirmButton';
 import SponsorCreateForm from '@/components/admin/SponsorCreateForm';
-import { cardCls, dangerBtnCls, inputCls, labelCls, selectCls, smallBtnCls } from '@/components/admin/ui';
+import {
+  cardCls,
+  dangerBtnCls,
+  inputCls,
+  labelCls,
+  microLabelCls,
+  selectCls,
+  smallBtnCls,
+  tagCls,
+  tagCyan,
+  tagGold,
+} from '@/components/admin/ui';
 
 const TIERS = ['platinum', 'gold', 'silver', 'bronze', 'partner'] as const;
 
-const TIER_PILL: Record<(typeof TIERS)[number], string> = {
+const TIER_TAG: Record<(typeof TIERS)[number], string> = {
   platinum: 'border-white/50 text-white',
-  gold: 'border-gold/60 text-gold',
+  gold: tagGold,
   silver: 'border-white/30 text-white/60',
   bronze: 'border-[#cd7f32]/60 text-[#cd7f32]',
-  partner: 'border-cyan/50 text-cyan',
+  partner: tagCyan,
 };
 
 export default async function SponsorsPage() {
@@ -24,14 +35,16 @@ export default async function SponsorsPage() {
   return (
     <div className="space-y-8">
       <header>
-        <p className="eyebrow">Sponsors</p>
-        <h1 className="mt-2 font-display text-3xl font-extrabold">
-          Sponsors <span className="font-mono text-lg text-white/40">({rows.length})</span>
+        <p className={microLabelCls}>Sponsors</p>
+        <h1 className="mt-2 font-display text-2xl uppercase tracking-wide sm:text-3xl">
+          <span className="font-extrabold text-cyan">Sponsor</span>{' '}
+          <span className="font-light text-white">Grid</span>{' '}
+          <span className="font-mono text-lg text-white/40">({rows.length})</span>
         </h1>
       </header>
 
-      <section className={cardCls + ' p-6 sm:p-8'}>
-        <h2 className="eyebrow mb-6">Add Sponsor</h2>
+      <section className={`${cardCls} p-6 sm:p-8`}>
+        <h2 className={`${microLabelCls} mb-6`}>Add Sponsor</h2>
         <SponsorCreateForm />
       </section>
 
@@ -40,19 +53,18 @@ export default async function SponsorsPage() {
       ) : (
         <ul className="grid gap-4 lg:grid-cols-2">
           {rows.map((s) => (
-            <li key={s.id} className={cardCls + ' p-5'}>
+            <li key={s.id} className={`${cardCls} p-5`}>
               <div className="mb-4 flex items-center justify-between gap-3">
+                <span className={`${tagCls} ${TIER_TAG[s.tier]}`}>{s.tier}</span>
                 <span
-                  className={`rounded-full border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider ${TIER_PILL[s.tier]}`}
-                >
-                  {s.tier}
-                </span>
-                <span
-                  className={`font-mono text-[10px] uppercase tracking-wider ${
+                  className={`inline-flex items-center gap-1.5 font-mono text-[0.6rem] uppercase tracking-wider ${
                     s.active ? 'text-cyan' : 'text-white/35'
                   }`}
                 >
-                  {s.active ? '● active' : '○ hidden'}
+                  <span
+                    className={`h-1.5 w-1.5 ${s.active ? 'animate-pulse bg-cyan' : 'bg-white/20'}`}
+                  />
+                  {s.active ? 'active' : 'hidden'}
                 </span>
               </div>
 

@@ -1,12 +1,19 @@
 import type { Metadata } from 'next';
-import { Inter, Montserrat, Space_Mono } from 'next/font/google';
+import { Bebas_Neue, Cormorant_Garamond, Inter, Space_Mono } from 'next/font/google';
 import AiConcierge from '@/components/ai/AiConcierge';
 import './globals.css';
 
-const montserrat = Montserrat({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['700', '800', '900'],
-  variable: '--font-montserrat',
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
+});
+
+const bebas = Bebas_Neue({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-bebas',
 });
 
 const inter = Inter({
@@ -38,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.variable} ${inter.variable} ${spaceMono.variable} antialiased`}
+        className={`${cormorant.variable} ${bebas.variable} ${inter.variable} ${spaceMono.variable} antialiased`}
       >
         {children}
         <AiConcierge />

@@ -3,15 +3,56 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import type { ComponentType } from 'react';
 import { signOut } from '@/app/admin/actions';
+import LogoMark from '@/components/site/LogoMark';
+import {
+  IconCalendar,
+  IconChat,
+  IconCpu,
+  IconFile,
+  IconGlobe,
+  IconMail,
+  IconMenu,
+  IconPower,
+  IconRadar,
+  IconUsers,
+  IconX,
+} from '@/components/admin/icons';
 
-const NAV = [
-  { href: '/admin', label: 'Overview', icon: '📡' },
-  { href: '/admin/events', label: 'Events', icon: '🎛️' },
-  { href: '/admin/sponsors', label: 'Sponsors', icon: '🤝' },
-  { href: '/admin/subscribers', label: 'Subscribers', icon: '📬' },
-  { href: '/admin/messages', label: 'Messages', icon: '💬' },
-] as const;
+type NavItem = {
+  href: string;
+  label: string;
+  icon: ComponentType<{ className?: string }>;
+};
+
+type NavSection = { label: string | null; items: NavItem[] };
+
+const SECTIONS: NavSection[] = [
+  {
+    label: null,
+    items: [{ href: '/admin', label: 'Overview', icon: IconRadar }],
+  },
+  {
+    label: 'Content',
+    items: [
+      { href: '/admin/events', label: 'Events', icon: IconCalendar },
+      { href: '/admin/blog', label: 'Blog', icon: IconFile },
+      { href: '/admin/sponsors', label: 'Sponsors', icon: IconUsers },
+    ],
+  },
+  {
+    label: 'Audience',
+    items: [
+      { href: '/admin/subscribers', label: 'Subscribers', icon: IconMail },
+      { href: '/admin/messages', label: 'Messages', icon: IconChat },
+    ],
+  },
+  {
+    label: 'System',
+    items: [{ href: '/admin/ai', label: 'AI Console', icon: IconCpu }],
+  },
+];
 
 export default function Sidebar({ unread }: { unread: number }) {
   const pathname = usePathname();
@@ -21,62 +62,77 @@ export default function Sidebar({ unread }: { unread: number }) {
     href === '/admin' ? pathname === '/admin' : pathname.startsWith(href);
 
   const nav = (
-    <nav className="flex flex-col gap-1 px-3">
-      {NAV.map((item) => {
-        const active = isActive(item.href);
-        return (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={() => setOpen(false)}
-            className={`relative flex items-center gap-3 rounded-lg px-3 py-2.5 font-mono text-xs uppercase tracking-widest transition-colors ${
-              active
-                ? 'bg-cyan/10 text-cyan'
-                : 'text-white/55 hover:bg-white/5 hover:text-white'
-            }`}
-          >
-            {active && (
-              <span className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-cyan shadow-glow-cyan" />
-            )}
-            <span aria-hidden>{item.icon}</span>
-            <span>{item.label}</span>
-            {item.href === '/admin/messages' && unread > 0 && (
-              <span className="ml-auto rounded-full bg-cyan/20 px-2 py-0.5 text-[10px] text-cyan">
-                {unread}
-              </span>
-            )}
-          </Link>
-        );
-      })}
+    <nav className="flex flex-col px-3">
+      {SECTIONS.map((section, i) => (
+        <div key={section.label ?? i} className="mb-1">
+          {section.label && (
+            <p className="mb-1 mt-4 px-3 font-mono text-[0.62rem] uppercase tracking-[0.25em] text-white/25">
+              {section.label}
+            </p>
+          )}
+          <div className="flex flex-col gap-0.5">
+            {section.items.map((item) => {
+              const active = isActive(item.href);
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={`relative flex items-center gap-3 rounded-none px-3 py-2.5 font-mono text-xs uppercase tracking-widest transition-colors ${
+                    active
+                      ? 'bg-cyan/5 text-cyan'
+                      : 'text-white/55 hover:bg-white/[0.03] hover:text-white'
+                  }`}
+                >
+                  {active && (
+                    <span className="absolute inset-y-0 left-0 w-[2px] bg-cyan" />
+                  )}
+                  <Icon className="h-4 w-4 shrink-0" />
+                  <span>{item.label}</span>
+                  {item.href === '/admin/messages' && unread > 0 && (
+                    <span className="ml-auto rounded-none border border-cyan/50 px-1.5 py-0.5 font-mono text-[10px] leading-none text-cyan">
+                      {unread}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      ))}
     </nav>
   );
 
   const footer = (
-    <div className="mt-auto flex flex-col gap-1 px-3 pb-5">
+    <div className="mt-auto flex flex-col gap-0.5 border-t border-white/5 px-3 pb-5 pt-3">
       <Link
         href="/"
         target="_blank"
-        className="flex items-center gap-3 rounded-lg px-3 py-2.5 font-mono text-xs uppercase tracking-widest text-white/55 transition-colors hover:bg-white/5 hover:text-white"
+        className="flex items-center gap-3 rounded-none px-3 py-2.5 font-mono text-xs uppercase tracking-widest text-white/55 transition-colors hover:bg-white/[0.03] hover:text-white"
       >
-        <span aria-hidden>🌍</span> View Site ↗
+        <IconGlobe className="h-4 w-4 shrink-0" /> View Site
       </Link>
       <form action={signOut}>
         <button
           type="submit"
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left font-mono text-xs uppercase tracking-widest text-white/55 transition-colors hover:bg-magenta/10 hover:text-magenta"
+          className="flex w-full items-center gap-3 rounded-none px-3 py-2.5 text-left font-mono text-xs uppercase tracking-widest text-white/55 transition-colors hover:bg-[#e93cac]/10 hover:text-[#e93cac]"
         >
-          <span aria-hidden>⏻</span> Sign Out
+          <IconPower className="h-4 w-4 shrink-0" /> Sign Out
         </button>
       </form>
     </div>
   );
 
   const brand = (
-    <div className="px-6 pb-6 pt-7">
-      <Link href="/admin" className="font-display text-sm font-extrabold tracking-wide">
-        ⚡ FREQUENCY WAVE
+    <div className="border-b border-white/5 px-6 pb-5 pt-6">
+      <Link href="/admin" className="flex items-center gap-2">
+        <LogoMark className="h-7 w-auto" />
+        <span className="font-display text-xl italic tracking-wide">
+          Frequency Wave
+        </span>
       </Link>
-      <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.25em] text-cyan/70">
+      <p className="mt-1.5 font-mono text-[0.62rem] uppercase tracking-[0.25em] text-cyan/70">
         Mission Control
       </p>
     </div>
@@ -85,28 +141,36 @@ export default function Sidebar({ unread }: { unread: number }) {
   return (
     <>
       {/* Mobile top bar */}
-      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/10 bg-navy-mid px-4 py-3 md:hidden">
-        <Link href="/admin" className="font-display text-sm font-extrabold">
-          ⚡ FREQUENCY WAVE
+      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-cyan/10 bg-[#040B24] px-4 py-3 md:hidden">
+        <Link href="/admin" className="flex items-center gap-2 font-display text-xl italic tracking-wide">
+          <LogoMark className="h-6 w-auto" /> Frequency Wave
         </Link>
         <button
           type="button"
           aria-label="Toggle navigation"
           onClick={() => setOpen((v) => !v)}
-          className="rounded-md border border-white/15 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-white/70"
+          className="flex items-center gap-2 rounded-none border border-white/15 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-white/70"
         >
-          {open ? 'Close ✕' : 'Menu ☰'}
+          {open ? (
+            <>
+              Close <IconX className="h-3.5 w-3.5" />
+            </>
+          ) : (
+            <>
+              Menu <IconMenu className="h-3.5 w-3.5" />
+            </>
+          )}
         </button>
       </header>
       {open && (
-        <div className="fixed inset-x-0 top-[53px] z-40 flex flex-col border-b border-white/10 bg-navy-mid pb-2 pt-2 md:hidden">
+        <div className="fixed inset-x-0 top-[53px] z-40 flex max-h-[calc(100vh-53px)] flex-col overflow-y-auto border-b border-cyan/10 bg-[#040B24] pb-2 pt-2 md:hidden">
           {nav}
           {footer}
         </div>
       )}
 
       {/* Desktop sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-white/8 bg-navy-mid md:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col overflow-y-auto border-r border-cyan/10 bg-[#040B24] md:flex">
         {brand}
         {nav}
         {footer}

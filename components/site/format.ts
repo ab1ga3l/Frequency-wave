@@ -1,5 +1,3 @@
-import type { Event } from '@/lib/db/schema';
-
 /** Server-side date formatting helpers — always Africa/Nairobi time. */
 
 const TZ = 'Africa/Nairobi';
@@ -16,14 +14,21 @@ export function fmtMonth(date: Date): string {
     .toUpperCase();
 }
 
-export function fmtDateLine(date: Date): string {
-  return new Intl.DateTimeFormat('en-KE', {
-    timeZone: TZ,
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  }).format(date);
+function fmtDayNumeric(date: Date): string {
+  return new Intl.DateTimeFormat('en-KE', { timeZone: TZ, day: 'numeric' }).format(
+    date,
+  );
+}
+
+/** Compact date range, e.g. "SEP 4–12" or "SEP 28 – OCT 2" or "SEP 4". */
+export function fmtRange(start: Date, end: Date | null): string {
+  const m1 = fmtMonth(start);
+  const d1 = fmtDayNumeric(start);
+  if (!end) return `${m1} ${d1}`;
+  const m2 = fmtMonth(end);
+  const d2 = fmtDayNumeric(end);
+  if (m1 === m2 && d1 === d2) return `${m1} ${d1}`;
+  return m1 === m2 ? `${m1} ${d1}–${d2}` : `${m1} ${d1} – ${m2} ${d2}`;
 }
 
 export function fmtDateTimeLine(date: Date): string {
@@ -41,41 +46,4 @@ export function fmtDateTimeLine(date: Date): string {
 /** Whether an event start time is still in the future. */
 export function isUpcomingDate(date: Date): boolean {
   return date.getTime() > Date.now();
-}
-
-/** Serializable shape passed to client components (no Date objects). */
-export type EventCardData = {
-  slug: string;
-  title: string;
-  tagline: string | null;
-  description: string;
-  startAtISO: string;
-  day: string;
-  month: string;
-  dateLine: string;
-  venue: string;
-  city: string;
-  registerUrl: string | null;
-  coverImage: string | null;
-  tags: string[];
-  isPast: boolean;
-};
-
-export function toEventCardData(event: Event, isPast: boolean): EventCardData {
-  return {
-    slug: event.slug,
-    title: event.title,
-    tagline: event.tagline,
-    description: event.description,
-    startAtISO: event.startAt.toISOString(),
-    day: fmtDay(event.startAt),
-    month: fmtMonth(event.startAt),
-    dateLine: fmtDateLine(event.startAt),
-    venue: event.venue,
-    city: event.city,
-    registerUrl: event.registerUrl,
-    coverImage: event.coverImage,
-    tags: event.tags,
-    isPast,
-  };
 }

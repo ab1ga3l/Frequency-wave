@@ -3,7 +3,7 @@ import { db, subscribers } from '@/lib/db';
 import { deleteSubscriber } from '@/app/admin/actions';
 import ConfirmButton from '@/components/admin/ConfirmButton';
 import CopyEmailsButton from '@/components/admin/CopyEmailsButton';
-import { cardCls, dangerBtnCls } from '@/components/admin/ui';
+import { cardCls, dangerBtnCls, microLabelCls } from '@/components/admin/ui';
 import { fmtDate } from '@/components/admin/format';
 
 export default async function SubscribersPage() {
@@ -16,18 +16,20 @@ export default async function SubscribersPage() {
     <div className="space-y-8">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="eyebrow">Subscribers</p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold">
-            Waitlist <span className="font-mono text-lg text-white/40">({rows.length})</span>
+          <p className={microLabelCls}>Subscribers</p>
+          <h1 className="mt-2 font-display text-2xl uppercase tracking-wide sm:text-3xl">
+            <span className="font-extrabold text-cyan">Signal</span>{' '}
+            <span className="font-light text-white">Roster</span>{' '}
+            <span className="font-mono text-lg text-white/40">({rows.length})</span>
           </h1>
         </div>
         <CopyEmailsButton emails={rows.map((r) => r.email)} />
       </header>
 
-      <div className={cardCls + ' overflow-x-auto'}>
+      <div className={`${cardCls} overflow-x-auto`}>
         <table className="w-full min-w-[480px] text-left text-sm">
           <thead>
-            <tr className="border-b border-white/10 font-mono text-[10px] uppercase tracking-widest text-white/40">
+            <tr className="border-b border-white/10 font-mono text-[0.62rem] uppercase tracking-[0.25em] text-white/40">
               <th className="px-5 py-3.5">Email</th>
               <th className="px-3 py-3.5">Joined (EAT)</th>
               <th className="px-5 py-3.5 text-right">Actions</th>
@@ -42,7 +44,7 @@ export default async function SubscribersPage() {
               </tr>
             )}
             {rows.map((sub) => (
-              <tr key={sub.id} className="transition-colors hover:bg-white/[0.03]">
+              <tr key={sub.id} className="transition-colors hover:bg-white/[0.02]">
                 <td className="px-5 py-3.5 font-mono text-xs text-white/85">{sub.email}</td>
                 <td className="whitespace-nowrap px-3 py-3.5 font-mono text-xs text-white/50">
                   {fmtDate(sub.createdAt)}

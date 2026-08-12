@@ -24,6 +24,13 @@ export default function Reveal({
       el.classList.add('in');
       return;
     }
+    // Anything already on screen at mount shows immediately — the scroll
+    // animation is only for content the visitor hasn't reached yet.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('in');
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {

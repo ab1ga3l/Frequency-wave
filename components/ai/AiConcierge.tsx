@@ -223,7 +223,7 @@ export default function AiConcierge() {
         setIsTyping(false);
         appendMessage({
           role: 'agent',
-          text: "I'm not live just yet — the team is plugging me in. Meanwhile, drop your question in the contact form below or email hello@frequencywave.co.ke ⚡",
+          text: "I'm not live just yet — the team is plugging me in. Meanwhile, drop your question in the contact form below or email hello@frequencywave.co.ke.",
           timestamp: new Date(),
         });
         return false;
@@ -332,10 +332,10 @@ export default function AiConcierge() {
                 className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full border border-white/10 bg-navy-light text-[10px] text-white/50 hover:text-white"
                 aria-label="Dismiss"
               >
-                ✕
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-2.5 w-2.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
               </button>
               <p className="mb-1 text-xs font-semibold text-white">
-                Questions about our events? 👋
+                Questions about our events?
               </p>
               <p className="text-[10px] leading-relaxed text-white/50">
                 Talk to Abby about dates, invites, sponsorship & more.
@@ -353,7 +353,7 @@ export default function AiConcierge() {
             className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-violet to-blue text-2xl shadow-glow-blue transition-transform hover:scale-110"
             aria-label="Chat with Abby"
           >
-            <span aria-hidden>🎧</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
             <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full border-2 border-navy bg-cyan animate-pulse-dot" />
           </button>
         </div>
@@ -367,7 +367,7 @@ export default function AiConcierge() {
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-violet to-blue text-lg">
-                  🎧
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
                 </div>
                 {isConnected && (
                   <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-navy-mid bg-cyan" />
@@ -387,7 +387,7 @@ export default function AiConcierge() {
               className="flex h-8 w-8 items-center justify-center rounded-full text-white/40 transition-colors hover:bg-white/5 hover:text-white"
               aria-label="Close chat"
             >
-              ✕
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-4 w-4" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
             </button>
           </div>
 
@@ -396,7 +396,7 @@ export default function AiConcierge() {
             <div className="flex-1 overflow-y-auto p-5">
               <div className="mb-8 mt-4 text-center">
                 <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-violet via-blue to-cyan text-4xl shadow-glow-violet">
-                  🎧
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-9 w-9 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
                 </div>
                 <h3 className="font-display text-lg font-extrabold text-white">
                   Chat with <span className="g-text">Abby</span>
@@ -412,7 +412,7 @@ export default function AiConcierge() {
                   onClick={() => handleStartChat('text')}
                   className="group flex flex-col items-center gap-2 rounded-2xl border border-white/[0.07] p-4 transition-all hover:border-cyan/40 hover:bg-cyan/[0.04]"
                 >
-                  <span className="text-xl">💬</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6 text-cyan" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3.75H12m9 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
                   <span className="text-xs font-semibold text-white">
                     Start with Text
                   </span>
@@ -421,7 +421,7 @@ export default function AiConcierge() {
                   onClick={() => handleStartChat('voice')}
                   className="group flex flex-col items-center gap-2 rounded-2xl border border-white/[0.07] p-4 transition-all hover:border-cyan/40 hover:bg-cyan/[0.04]"
                 >
-                  <span className="text-xl">🎙️</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6 text-cyan" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3z" /></svg>
                   <span className="text-xs font-semibold text-white">
                     Start with Voice
                   </span>
@@ -476,7 +476,7 @@ export default function AiConcierge() {
                   >
                     {msg.role === 'agent' && (
                       <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet to-blue text-xs">
-                        🎧
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-3.5 w-3.5 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
                       </div>
                     )}
                     <div
@@ -550,7 +550,7 @@ export default function AiConcierge() {
                         : 'Switch to voice'
                     }
                   >
-                    🎙️
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-4 w-4" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3z" /></svg>
                   </button>
                   <div className="flex flex-1 items-center rounded-full border border-white/[0.07] bg-navy transition-colors focus-within:border-cyan/40">
                     <input
@@ -577,7 +577,7 @@ export default function AiConcierge() {
                       className="px-4 py-2.5 text-white/40 transition-colors hover:text-cyan disabled:opacity-30"
                       aria-label="Send"
                     >
-                      ➤
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-4 w-4" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.27 3.126A59.77 59.77 0 0 1 21.485 12 59.77 59.77 0 0 1 3.27 20.876L6 12zm0 0h7.5" /></svg>
                     </button>
                   </div>
                 </div>

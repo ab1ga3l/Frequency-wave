@@ -59,6 +59,16 @@ export function countdown(d: Date, now: Date = new Date()): string {
   return `${Math.abs(days)} days ago`;
 }
 
+/** HUD countdown label, e.g. "T-22 DAYS", "T-0 TODAY", "T+3 DAYS". */
+export function tMinus(d: Date, now: Date = new Date()): string {
+  const dayMs = 86_400_000;
+  const days = Math.round((d.getTime() - now.getTime()) / dayMs);
+  if (days === 0) return 'T-0 TODAY';
+  if (days > 0) return `T-${days} ${days === 1 ? 'DAY' : 'DAYS'}`;
+  const past = Math.abs(days);
+  return `T+${past} ${past === 1 ? 'DAY' : 'DAYS'}`;
+}
+
 export function isUpcoming(d: Date, now: Date = new Date()): boolean {
   return d.getTime() >= now.getTime();
 }
