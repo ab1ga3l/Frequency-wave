@@ -82,7 +82,7 @@ export default function UpcomingEvent({
                     </a>
                   )}
                   <Link href={`/events/${event.slug}`} className="btn-outline">
-                    View Program
+                    Event details
                   </Link>
                 </div>
               </div>

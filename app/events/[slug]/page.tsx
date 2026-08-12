@@ -194,9 +194,9 @@ export default async function EventPage({ params }: Props) {
             <div className="mx-auto max-w-5xl px-5 sm:px-6">
               <Reveal>
                 <SectionHeading
-                  accent="Run Of"
-                  rest="Show"
-                  subtitle="The Full Program"
+                  accent="The"
+                  rest="Agenda"
+                  subtitle="What to expect"
                 />
               </Reveal>
               <ol className="mt-12">

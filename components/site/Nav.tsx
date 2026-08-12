@@ -8,7 +8,6 @@ import LogoMark from './LogoMark';
 const LINKS = [
   { label: 'About', href: '/#about' },
   { label: 'Events', href: '/#events' },
-  { label: 'Program', href: '/#program' },
   { label: 'DJs', href: '/#djs' },
   { label: 'Blog', href: '/blog' },
   { label: 'Sponsorship', href: '/#sponsorship' },
