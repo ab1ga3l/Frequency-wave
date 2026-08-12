@@ -54,13 +54,13 @@ export default function HeroBand({ event: _event }: { event: HeroEventCard | nul
         >
           <div
             aria-hidden="true"
-            className="anim-glow absolute -inset-3 rounded-2xl blur-xl"
+            className="anim-glow absolute -inset-3 rounded-[40px] blur-xl"
             style={{
               background:
                 'linear-gradient(135deg, rgba(0,248,255,0.4), rgba(107,0,245,0.45))',
             }}
           />
-          <div className="anim-float relative overflow-hidden rounded-xl border border-white/10">
+          <div className="anim-float relative overflow-hidden rounded-[40px] border border-cyan/30 shadow-[0_0_16px_rgba(0,248,255,0.18)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/unplugged-poster.jpg"

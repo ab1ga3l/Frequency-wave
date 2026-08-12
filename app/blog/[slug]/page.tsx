@@ -81,7 +81,7 @@ export default async function BlogPostPage({
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="border border-white/20 px-2 py-0.5 font-mono text-[0.6rem] uppercase tracking-[0.25em] text-white/60"
+                  className="rounded-full border border-white/20 px-2 py-0.5 font-mono text-[0.6rem] uppercase tracking-[0.25em] text-white/60"
                 >
                   {tag}
                 </span>
@@ -118,7 +118,7 @@ export default async function BlogPostPage({
         </p>
         <Link
           href="/#contact"
-          className="mt-8 inline-block rounded-[2px] bg-[#265BFF] px-8 py-3 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#6B00F5]"
+          className="btn-primary mt-8"
         >
           Get in touch
         </Link>

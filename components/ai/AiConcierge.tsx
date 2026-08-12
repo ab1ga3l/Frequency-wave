@@ -225,7 +225,7 @@ export default function AiConcierge() {
         setIsTyping(false);
         appendMessage({
           role: 'agent',
-          text: "I'm not live just yet — the team is plugging me in. Meanwhile, drop your question in the contact form below or email hello@frequencywave.co.ke.",
+          text: "I'm not live just yet — the team is plugging me in. Meanwhile, drop your question in the contact form below or email frequencywave101@gmail.com.",
           timestamp: new Date(),
         });
         return false;

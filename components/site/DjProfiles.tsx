@@ -7,7 +7,7 @@ const DJS = [
   {
     image: '/images/dj.jpg',
     alt: 'DJ silhouette behind the decks in stage light',
-    text: 'Lineup reveal loading. Follow @frequencywave for the drop.',
+    text: 'Lineup reveal loading. Follow @the_wave_africa for the drop.',
   },
   {
     image: '/images/dj2.jpg',
@@ -34,7 +34,7 @@ export default function DjProfiles() {
           {DJS.map((dj, i) => (
             <Reveal key={dj.image} delay={i * 90}>
               <article className="text-center">
-                <div className="img-zoom border border-white/10">
+                <div className="img-zoom">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={dj.image}

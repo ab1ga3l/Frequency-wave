@@ -58,7 +58,7 @@ export default function Sponsorship() {
                 Become A Sponsor
               </a>
             </div>
-            <div className="img-zoom border border-white/10">
+            <div className="img-zoom">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/crowd.jpg"
@@ -72,7 +72,7 @@ export default function Sponsorship() {
         <div className="mt-14 grid gap-4 sm:grid-cols-4">
           {TIERS.map((tier, i) => (
             <Reveal key={tier.name} delay={i * 70} className="h-full">
-              <div className="h-full border border-white/10 p-5 transition-transform duration-300 hover:-translate-y-1 hover:border-cyan/30">
+              <div className="h-full rounded-[40px] border border-white/10 p-5 transition-transform duration-300 hover:-translate-y-1 hover:border-cyan/30">
                 <h3
                   className={`font-display text-lg italic font-semibold ${tier.color}`}
                 >

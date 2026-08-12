@@ -41,8 +41,10 @@ Timeline:​
 
 :telephone_receiver: Contact
 - Website: frequencywave.co.ke
-- Email: hello@frequencywave.co.ke
-- Instagram/X: @frequencywave
+- Email: frequencywave101@gmail.com
+- X: @The_wave_Africa
+- Instagram: @the_wave_africa
+- TikTok: @the_wave_africa
 - Location: Nairobi, Kenya
 
 ---

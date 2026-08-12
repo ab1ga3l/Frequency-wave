@@ -56,10 +56,10 @@ const INFO: {
     label: 'Email',
     value: (
       <a
-        href="mailto:hello@frequencywave.co.ke"
+        href="mailto:frequencywave101@gmail.com"
         className="transition-colors hover:text-cyan"
       >
-        hello@frequencywave.co.ke
+        frequencywave101@gmail.com
       </a>
     ),
   },
@@ -72,30 +72,30 @@ const INFO: {
     icon: AtIcon,
     label: 'Socials',
     value: (
-      <span className="flex flex-wrap gap-x-3 gap-y-1">
+      <span className="flex flex-col gap-1.5">
         <a
-          href="https://x.com/frequencywave"
+          href="https://x.com/The_wave_Africa"
           target="_blank"
           rel="noopener noreferrer"
           className="transition-colors hover:text-cyan"
         >
-          @frequencywave on X
+          X · @The_wave_Africa
         </a>
         <a
-          href="https://instagram.com/frequencywave"
+          href="https://instagram.com/the_wave_africa"
           target="_blank"
           rel="noopener noreferrer"
           className="transition-colors hover:text-cyan"
         >
-          Instagram
+          Instagram · @the_wave_africa
         </a>
         <a
-          href="https://linktr.ee/frequencywave101"
+          href="https://www.tiktok.com/@the_wave_africa"
           target="_blank"
           rel="noopener noreferrer"
           className="transition-colors hover:text-cyan"
         >
-          linktr.ee/frequencywave101
+          TikTok · @the_wave_africa
         </a>
       </span>
     ),

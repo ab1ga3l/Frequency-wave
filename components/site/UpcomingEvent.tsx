@@ -42,7 +42,7 @@ export default function UpcomingEvent({
         {event ? (
           <Reveal className="mt-14">
             <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
-              <div className="img-zoom border border-white/10">
+              <div className="img-zoom">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={event.coverImage ?? '/images/unplugged-poster.jpg'}

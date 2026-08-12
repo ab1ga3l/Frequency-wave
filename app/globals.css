@@ -2,7 +2,7 @@
 
 /* ════════════════════════════════════════════════════════════
    FREQUENCY WAVE — Design System
-   Matched to the Unplugged poster: cyan → blue → violet
+   Matched to the Unplugged poster: cyan → blue → violet, 40px image corners
    Display: Bodoni Moda (high-contrast luxury serif) · Poster: Bebas Neue (UNPLUGGED)
    ════════════════════════════════════════════════════════════ */
 
@@ -316,6 +316,12 @@ body {
 
 .img-zoom {
   overflow: hidden;
+  border-radius: 40px;
+  border: 1px solid rgba(0, 248, 255, 0.3);
+  box-shadow: 0 0 16px rgba(0, 248, 255, 0.18);
+}
+.img-zoom.rounded-full {
+  border-radius: 9999px;
 }
 .img-zoom img {
   transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);

@@ -79,7 +79,7 @@ export default async function EventPage({ params }: Props) {
             </Link>
 
             <div className="mt-8 max-w-3xl">
-              <span className="inline-block border border-white/30 px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-white/70">
+              <span className="inline-block rounded-full border border-white/30 px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-white/70">
                 {isUpcoming ? 'Upcoming Event' : 'Past Event'}
               </span>
 
@@ -103,7 +103,7 @@ export default async function EventPage({ params }: Props) {
                   {event.tags.map((tag) => (
                     <li
                       key={tag}
-                      className="border border-white/20 px-3 py-1 text-[0.6rem] uppercase tracking-widest text-white/60"
+                      className="rounded-full border border-white/20 px-3 py-1 text-[0.6rem] uppercase tracking-widest text-white/60"
                     >
                       {tag}
                     </li>
@@ -246,13 +246,13 @@ export default async function EventPage({ params }: Props) {
               <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {event.tiers.map((tier, i) => (
                   <Reveal key={tier.id} delay={i * 80} className="h-full">
-                    <article className="flex h-full flex-col gap-4 border border-white/10 p-6">
+                    <article className="flex h-full flex-col gap-4 rounded-[40px] border border-white/10 p-6">
                       <div className="flex items-start justify-between gap-3">
                         <h3 className="font-display text-xl italic font-semibold text-cyan">
                           {tier.name}
                         </h3>
                         {tier.soldOut && (
-                          <span className="border border-white/30 px-2.5 py-1 text-[0.6rem] uppercase tracking-[0.2em] text-white/60">
+                          <span className="rounded-full border border-white/30 px-2.5 py-1 text-[0.6rem] uppercase tracking-[0.2em] text-white/60">
                             Sold Out
                           </span>
                         )}

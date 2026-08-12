@@ -60,10 +60,10 @@ export default async function BlogPage() {
           ) : (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {rows.map((post) => (
-                <article key={post.id} className="flex flex-col border border-white/10 bg-[#040B24]">
+                <article key={post.id} className="flex flex-col overflow-hidden rounded-[40px] border border-cyan/30 bg-[#040B24] shadow-[0_0_16px_rgba(0,248,255,0.18)]">
                   <Link href={`/blog/${post.slug}`} className="block">
                     <div
-                      className="aspect-video w-full border-b border-white/10 bg-cover bg-center"
+                      className="aspect-video w-full bg-cover bg-center"
                       style={{
                         backgroundImage: `url(${post.coverImage || '/images/crowd.jpg'})`,
                       }}

@@ -68,7 +68,7 @@ export default function WhoWeAre() {
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2">
           <Reveal>
-            <article className="h-full border border-white/10 p-6 transition-colors hover:border-cyan/30 sm:p-8">
+            <article className="h-full rounded-[40px] border border-white/10 p-6 transition-colors hover:border-cyan/30 sm:p-8">
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.25em] text-cyan">
                 Mission
               </p>
@@ -83,7 +83,7 @@ export default function WhoWeAre() {
             </article>
           </Reveal>
           <Reveal delay={80}>
-            <article className="h-full border border-white/10 p-6 transition-colors hover:border-cyan/30 sm:p-8">
+            <article className="h-full rounded-[40px] border border-white/10 p-6 transition-colors hover:border-cyan/30 sm:p-8">
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.25em] text-cyan">
                 Vision
               </p>
