@@ -6,6 +6,8 @@ import Nav from '@/components/site/Nav';
 import Footer from '@/components/site/Footer';
 import WaveBand from '@/components/site/WaveBand';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'The Frequency — Frequency Wave Blog',
   description:
@@ -20,11 +22,16 @@ const dateFmt = new Intl.DateTimeFormat('en-KE', {
 });
 
 export default async function BlogPage() {
-  const rows = await db
-    .select()
-    .from(posts)
-    .where(eq(posts.status, 'published'))
-    .orderBy(desc(posts.publishedAt));
+  let rows: (typeof posts.$inferSelect)[] = [];
+  try {
+    rows = await db
+      .select()
+      .from(posts)
+      .where(eq(posts.status, 'published'))
+      .orderBy(desc(posts.publishedAt));
+  } catch {
+    rows = [];
+  }
 
   return (
     <div className="bg-[#040B24] text-white">

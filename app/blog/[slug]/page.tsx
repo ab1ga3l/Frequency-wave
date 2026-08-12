@@ -7,6 +7,8 @@ import Nav from '@/components/site/Nav';
 import Footer from '@/components/site/Footer';
 import { renderMarkdown } from '../render-md';
 
+export const dynamic = 'force-dynamic';
+
 const dateFmt = new Intl.DateTimeFormat('en-KE', {
   timeZone: 'Africa/Nairobi',
   day: '2-digit',

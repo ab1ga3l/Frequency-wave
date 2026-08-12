@@ -18,10 +18,16 @@ import { fmtDay, fmtMonth, fmtRange } from '@/components/site/format';
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  const [featured, past] = await Promise.all([
-    getFeaturedEvent(),
-    getPastEvents(),
-  ]);
+  let featured = null;
+  let past: Awaited<ReturnType<typeof getPastEvents>> = [];
+  try {
+    [featured, past] = await Promise.all([
+      getFeaturedEvent(),
+      getPastEvents(),
+    ]);
+  } catch {
+    // Public pages still render when the database is unreachable (e.g. first Vercel deploy).
+  }
 
   const featuredData = featured
     ? {
