@@ -16,6 +16,7 @@ import ConfirmButton from '@/components/admin/ConfirmButton';
 import {
   cardCls,
   dangerBtnCls,
+  headingCls,
   inputCls,
   labelCls,
   microLabelCls,
@@ -63,16 +64,14 @@ export default async function EditEventPage({
         <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className={microLabelCls}>Edit Event</p>
-            <h1 className="mt-2 font-display text-2xl font-extrabold uppercase tracking-wide sm:text-3xl">
-              {event.title}
-            </h1>
+            <h1 className={headingCls}>{event.title}</h1>
             <p className="mt-1 font-mono text-xs text-white/40">/{event.slug}</p>
           </div>
           {event.status === 'published' && (
             <Link
               href={`/events/${event.slug}`}
               target="_blank"
-              className="rounded-none border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-widest text-white/70 transition-colors hover:border-cyan/50 hover:text-cyan"
+              className="rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-widest text-white/70 transition-colors hover:border-cyan/50 hover:text-cyan"
             >
               View Live
             </Link>
@@ -107,7 +106,7 @@ export default async function EditEventPage({
               <li key={item.id}>
                 <form
                   action={updateAgendaItem}
-                  className="grid gap-3 rounded-none border border-white/10 bg-[#040B24]/60 p-4 sm:grid-cols-[90px_60px_1fr]"
+                  className="grid gap-3 rounded-2xl border border-white/10 bg-[#040B24]/60 p-4 sm:grid-cols-[90px_60px_1fr]"
                 >
                   <input type="hidden" name="id" value={item.id} />
                   <div>
@@ -215,7 +214,7 @@ export default async function EditEventPage({
               <li key={tier.id}>
                 <form
                   action={updateTicketTier}
-                  className="space-y-3 rounded-none border border-white/10 bg-[#040B24]/60 p-4"
+                  className="space-y-3 rounded-2xl border border-white/10 bg-[#040B24]/60 p-4"
                 >
                   <input type="hidden" name="id" value={tier.id} />
                   <div className="grid gap-3 sm:grid-cols-[1fr_140px_60px]">

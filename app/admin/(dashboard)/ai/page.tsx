@@ -3,6 +3,7 @@ import { db } from '@/lib/db';
 import { aiConversations } from '@/lib/db/schema';
 import {
   cardCls,
+  headingCls,
   microLabelCls,
   tagCls,
   tagCyan,
@@ -33,9 +34,9 @@ export default async function AiConversationsPage() {
     <div className="space-y-8">
       <header>
         <p className={microLabelCls}>AI Console</p>
-        <h1 className="mt-2 font-display text-2xl uppercase tracking-wide sm:text-3xl">
-          <span className="font-extrabold text-cyan">Agent</span>{' '}
-          <span className="font-light text-white">Transmissions</span>{' '}
+        <h1 className={headingCls}>
+          <span className="text-cyan">Agent</span>{' '}
+          <span className="text-white">Transmissions</span>{' '}
           <span className="font-mono text-lg text-white/40">({rows.length})</span>
         </h1>
       </header>

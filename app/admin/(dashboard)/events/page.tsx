@@ -7,6 +7,7 @@ import ConfirmButton from '@/components/admin/ConfirmButton';
 import {
   cardCls,
   dangerBtnCls,
+  headingCls,
   microLabelCls,
   smallBtnCls,
   tagCls,
@@ -32,9 +33,9 @@ export default async function EventsPage() {
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className={microLabelCls}>Events</p>
-          <h1 className="mt-2 font-display text-2xl uppercase tracking-wide sm:text-3xl">
-            <span className="font-extrabold text-cyan">All</span>{' '}
-            <span className="font-light text-white">Events</span>{' '}
+          <h1 className={headingCls}>
+            <span className="text-cyan">All</span>{' '}
+            <span className="text-white">Events</span>{' '}
             <span className="font-mono text-lg text-white/40">({rows.length})</span>
           </h1>
         </div>

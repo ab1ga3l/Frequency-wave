@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation';
 import { createSession, getSession, verifyCredentials } from '@/lib/auth';
 import { cardCls, errorBannerCls, inputCls, labelCls } from '@/components/admin/ui';
 import LogoMark from '@/components/site/LogoMark';
+import PageBackdrop from '@/components/site/PageBackdrop';
+import WaveCanvas from '@/components/site/WaveCanvas';
 
 export const metadata: Metadata = {
   title: 'Sign In — Frequency Wave Mission Control',
@@ -27,24 +29,21 @@ export default async function LoginPage({
   }
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-[#030818] px-4">
-      {/* Faint fixed grid backdrop */}
+    <main className="relative flex min-h-screen items-center justify-center px-4">
+      <PageBackdrop />
       <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(0,248,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(107,0,245,0.05) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-        }}
-      />
-      <div className={`${cardCls} relative w-full max-w-md p-8 sm:p-10`}>
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-48 opacity-80"
+      >
+        <WaveCanvas variant="hero" />
+      </div>
+      <div className={`${cardCls} relative z-10 w-full max-w-md p-8 sm:p-10`}>
         <div className="mb-8 text-center">
           <p className="flex items-center justify-center gap-2.5 font-display text-3xl italic tracking-wide">
             <LogoMark className="h-8 w-auto" />
             <span>
-              <span className="text-cyan">Frequency</span>{' '}
-              <span className="text-white">Wave</span>
+              <span className="text-white">Frequency</span>{' '}
+              <span className="text-cyan">Wave</span>
             </span>
           </p>
           <p className="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.3em] text-cyan/80">

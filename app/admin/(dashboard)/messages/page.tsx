@@ -2,7 +2,7 @@ import { desc, eq, count } from 'drizzle-orm';
 import { db, messages } from '@/lib/db';
 import { deleteMessage, setMessageRead } from '@/app/admin/actions';
 import ConfirmButton from '@/components/admin/ConfirmButton';
-import { cardCls, dangerBtnCls, microLabelCls, smallBtnCls } from '@/components/admin/ui';
+import { cardCls, dangerBtnCls, headingCls, microLabelCls, smallBtnCls } from '@/components/admin/ui';
 import { fmtDateTime } from '@/components/admin/format';
 import { IconChevronDown } from '@/components/admin/icons';
 
@@ -16,9 +16,9 @@ export default async function MessagesPage() {
     <div className="space-y-8">
       <header>
         <p className={microLabelCls}>Messages</p>
-        <h1 className="mt-2 font-display text-2xl uppercase tracking-wide sm:text-3xl">
-          <span className="font-extrabold text-cyan">Incoming</span>{' '}
-          <span className="font-light text-white">Signals</span>{' '}
+        <h1 className={headingCls}>
+          <span className="text-cyan">Incoming</span>{' '}
+          <span className="text-white">Signals</span>{' '}
           <span className="font-mono text-lg text-white/40">
             ({unread} unread / {rows.length})
           </span>

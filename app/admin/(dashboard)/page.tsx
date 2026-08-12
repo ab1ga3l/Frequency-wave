@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { and, asc, count, desc, eq, gte } from 'drizzle-orm';
 import { db, events, messages, posts, subscribers } from '@/lib/db';
-import { cardCls, microLabelCls } from '@/components/admin/ui';
+import { cardCls, headingCls, microLabelCls } from '@/components/admin/ui';
 import { fmtDateTime, fmtShort, tMinus } from '@/components/admin/format';
 import {
   IconCalendar,
@@ -62,9 +62,9 @@ export default async function OverviewPage() {
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className={microLabelCls}>Overview</p>
-          <h1 className="mt-2 font-display text-2xl uppercase tracking-wide sm:text-3xl">
-            <span className="font-extrabold text-cyan">Mission</span>{' '}
-            <span className="font-light text-white">Control</span>
+          <h1 className={headingCls}>
+            <span className="text-cyan">Mission</span>{' '}
+            <span className="text-white">Control</span>
           </h1>
         </div>
         <Link href="/admin/events/new" className="btn-primary text-sm">
@@ -95,8 +95,8 @@ export default async function OverviewPage() {
           {nextEvent ? (
             <div className="mt-4">
               <div className="flex items-start justify-between gap-4">
-                <h2 className="font-display text-xl font-bold uppercase">{nextEvent.title}</h2>
-                <span className="shrink-0 rounded-none border border-cyan/50 px-2 py-0.5 font-mono text-[0.6rem] uppercase tracking-wider text-cyan">
+                <h2 className="font-display text-xl italic">{nextEvent.title}</h2>
+                <span className="shrink-0 rounded-full border border-cyan/50 px-2 py-0.5 font-mono text-[0.6rem] uppercase tracking-wider text-cyan">
                   {tMinus(nextEvent.startAt, now)}
                 </span>
               </div>
@@ -117,7 +117,7 @@ export default async function OverviewPage() {
               </dl>
               <Link
                 href={`/admin/events/${nextEvent.id}`}
-                className="mt-5 inline-block rounded-none border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-widest text-white/70 transition-colors hover:border-cyan/50 hover:text-cyan"
+                className="mt-5 inline-block rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-widest text-white/70 transition-colors hover:border-cyan/50 hover:text-cyan"
               >
                 Edit Event
               </Link>
@@ -129,7 +129,7 @@ export default async function OverviewPage() {
               </p>
               <Link
                 href="/admin/events/new"
-                className="mt-4 inline-block rounded-none border border-cyan/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-cyan transition-colors hover:bg-cyan/10"
+                className="mt-4 inline-block rounded-full border border-cyan/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-cyan transition-colors hover:bg-cyan/10"
               >
                 Create Event
               </Link>

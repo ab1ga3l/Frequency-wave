@@ -6,6 +6,7 @@ import SponsorCreateForm from '@/components/admin/SponsorCreateForm';
 import {
   cardCls,
   dangerBtnCls,
+  headingCls,
   inputCls,
   labelCls,
   microLabelCls,
@@ -36,9 +37,9 @@ export default async function SponsorsPage() {
     <div className="space-y-8">
       <header>
         <p className={microLabelCls}>Sponsors</p>
-        <h1 className="mt-2 font-display text-2xl uppercase tracking-wide sm:text-3xl">
-          <span className="font-extrabold text-cyan">Sponsor</span>{' '}
-          <span className="font-light text-white">Grid</span>{' '}
+        <h1 className={headingCls}>
+          <span className="text-cyan">Sponsor</span>{' '}
+          <span className="text-white">Grid</span>{' '}
           <span className="font-mono text-lg text-white/40">({rows.length})</span>
         </h1>
       </header>

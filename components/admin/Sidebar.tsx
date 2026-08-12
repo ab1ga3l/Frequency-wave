@@ -79,19 +79,19 @@ export default function Sidebar({ unread }: { unread: number }) {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className={`relative flex items-center gap-3 rounded-none px-3 py-2.5 font-mono text-xs uppercase tracking-widest transition-colors ${
+                  className={`relative flex items-center gap-3 rounded-full px-3 py-2.5 font-mono text-xs uppercase tracking-widest transition-colors ${
                     active
-                      ? 'bg-cyan/5 text-cyan'
-                      : 'text-white/55 hover:bg-white/[0.03] hover:text-white'
+                      ? 'bg-cyan/10 text-cyan'
+                      : 'text-white/55 hover:bg-white/[0.06] hover:text-white'
                   }`}
                 >
                   {active && (
-                    <span className="absolute inset-y-0 left-0 w-[2px] bg-cyan" />
+                    <span className="absolute inset-y-1.5 left-1 w-[3px] rounded-full bg-cyan" />
                   )}
                   <Icon className="h-4 w-4 shrink-0" />
                   <span>{item.label}</span>
                   {item.href === '/admin/messages' && unread > 0 && (
-                    <span className="ml-auto rounded-none border border-cyan/50 px-1.5 py-0.5 font-mono text-[10px] leading-none text-cyan">
+                    <span className="ml-auto rounded-full border border-cyan/50 px-1.5 py-0.5 font-mono text-[10px] leading-none text-cyan">
                       {unread}
                     </span>
                   )}
@@ -109,14 +109,14 @@ export default function Sidebar({ unread }: { unread: number }) {
       <Link
         href="/"
         target="_blank"
-        className="flex items-center gap-3 rounded-none px-3 py-2.5 font-mono text-xs uppercase tracking-widest text-white/55 transition-colors hover:bg-white/[0.03] hover:text-white"
+        className="flex items-center gap-3 rounded-full px-3 py-2.5 font-mono text-xs uppercase tracking-widest text-white/55 transition-colors hover:bg-white/[0.06] hover:text-white"
       >
         <IconGlobe className="h-4 w-4 shrink-0" /> View Site
       </Link>
       <form action={signOut}>
         <button
           type="submit"
-          className="flex w-full items-center gap-3 rounded-none px-3 py-2.5 text-left font-mono text-xs uppercase tracking-widest text-white/55 transition-colors hover:bg-[#e93cac]/10 hover:text-[#e93cac]"
+          className="flex w-full items-center gap-3 rounded-full px-3 py-2.5 text-left font-mono text-xs uppercase tracking-widest text-white/55 transition-colors hover:bg-[#e93cac]/10 hover:text-[#e93cac]"
         >
           <IconPower className="h-4 w-4 shrink-0" /> Sign Out
         </button>
@@ -141,7 +141,7 @@ export default function Sidebar({ unread }: { unread: number }) {
   return (
     <>
       {/* Mobile top bar */}
-      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-cyan/10 bg-[#040B24] px-4 py-3 md:hidden">
+      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/10 bg-[#040B24]/70 px-4 py-3 backdrop-blur-md md:hidden">
         <Link href="/admin" className="flex items-center gap-2 font-display text-xl italic tracking-wide">
           <LogoMark className="h-6 w-auto" /> Frequency Wave
         </Link>
@@ -149,7 +149,7 @@ export default function Sidebar({ unread }: { unread: number }) {
           type="button"
           aria-label="Toggle navigation"
           onClick={() => setOpen((v) => !v)}
-          className="flex items-center gap-2 rounded-none border border-white/15 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-white/70"
+          className="flex items-center gap-2 rounded-full border border-white/15 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-white/70"
         >
           {open ? (
             <>
@@ -163,14 +163,14 @@ export default function Sidebar({ unread }: { unread: number }) {
         </button>
       </header>
       {open && (
-        <div className="fixed inset-x-0 top-[53px] z-40 flex max-h-[calc(100vh-53px)] flex-col overflow-y-auto border-b border-cyan/10 bg-[#040B24] pb-2 pt-2 md:hidden">
+        <div className="fixed inset-x-0 top-[53px] z-40 flex max-h-[calc(100vh-53px)] flex-col overflow-y-auto border-b border-white/10 bg-[#040B24]/90 pb-2 pt-2 backdrop-blur-md md:hidden">
           {nav}
           {footer}
         </div>
       )}
 
       {/* Desktop sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col overflow-y-auto border-r border-cyan/10 bg-[#040B24] md:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col overflow-y-auto border-r border-white/10 bg-[#040B24]/70 backdrop-blur-md md:flex">
         {brand}
         {nav}
         {footer}

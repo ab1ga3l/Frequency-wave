@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm';
 import { db, posts } from '@/lib/db';
 import { updatePost } from '@/app/admin/actions';
 import PostForm from '@/components/admin/PostForm';
-import { cardCls, microLabelCls, okBannerCls } from '@/components/admin/ui';
+import { cardCls, headingCls, microLabelCls, okBannerCls } from '@/components/admin/ui';
 
 export default async function EditPostPage({
   params,
@@ -33,16 +33,14 @@ export default async function EditPostPage({
         <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className={microLabelCls}>Edit Post</p>
-            <h1 className="mt-2 font-display text-2xl font-extrabold uppercase tracking-wide sm:text-3xl">
-              {post.title}
-            </h1>
+            <h1 className={headingCls}>{post.title}</h1>
             <p className="mt-1 font-mono text-xs text-white/40">/blog/{post.slug}</p>
           </div>
           {post.status === 'published' && (
             <Link
               href={`/blog/${post.slug}`}
               target="_blank"
-              className="rounded-none border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-widest text-white/70 transition-colors hover:border-cyan/50 hover:text-cyan"
+              className="rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-widest text-white/70 transition-colors hover:border-cyan/50 hover:text-cyan"
             >
               View Live
             </Link>
