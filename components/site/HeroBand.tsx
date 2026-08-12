@@ -1,6 +1,5 @@
 /** Brand hero: Frequency Wave first. Featured Unplugged poster on the right. */
 import Link from 'next/link';
-import FlowWaveStrip from './FlowWaveStrip';
 import WaveCanvas from './WaveCanvas';
 import { UNPLUGGED_RSVP_URL } from '@/lib/seo';
 
@@ -34,10 +33,6 @@ export default function HeroBand({ event }: { event: HeroEventCard | null }) {
             <span className="hero-freq">Frequency</span>
             <span className="hero-wave">Wave</span>
           </h1>
-          <FlowWaveStrip
-            gid="hero-flow"
-            className="hero-in hero-in-d2 mt-1 h-8 w-full max-w-lg opacity-90 sm:h-11"
-          />
           <p className="hero-in hero-in-d3 mt-4 font-display text-2xl italic font-normal text-white/90 sm:text-[1.7rem]">
             Awaken the Frequency.
           </p>
@@ -80,7 +75,7 @@ export default function HeroBand({ event }: { event: HeroEventCard | null }) {
                   href={rsvpUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary !w-full"
+                  className="btn-primary !w-auto"
                 >
                   RSVP on Luma
                 </a>

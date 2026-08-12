@@ -19,7 +19,7 @@ export type PastWave = {
   dateLabel: string;
 };
 
-/** Featured-event split section plus a compact list of past waves. */
+/** Featured-event glass card: photo fills the left pane, copy on the right. */
 export default function UpcomingEvent({
   event,
   past,
@@ -41,16 +41,28 @@ export default function UpcomingEvent({
 
         {event ? (
           <Reveal className="mt-10 sm:mt-14">
-            <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
-              <div className="img-zoom">
+            <article className="grid overflow-hidden rounded-[28px] border border-cyan/30 bg-white/[0.06] backdrop-blur-md sm:rounded-[40px] lg:grid-cols-2">
+              <div className="relative aspect-[4/3] min-h-[220px] sm:min-h-[280px] lg:aspect-auto lg:min-h-[420px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={event.coverImage ?? '/images/unplugged-poster.jpg'}
                   alt={event.title}
-                  className="aspect-square w-full object-contain"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
+                {event.registerUrl && (
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#040B24]/90 via-[#040B24]/35 to-transparent px-4 pb-4 pt-16 lg:hidden">
+                    <a
+                      href={event.registerUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary !w-auto"
+                    >
+                      RSVP on Luma
+                    </a>
+                  </div>
+                )}
               </div>
-              <div>
+              <div className="flex flex-col justify-center p-5 sm:p-8">
                 <h3 className="font-display text-2xl font-bold italic text-white sm:text-3xl">
                   {event.title}
                 </h3>
@@ -76,7 +88,7 @@ export default function UpcomingEvent({
                       href={event.registerUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary"
+                      className="btn-primary hidden lg:inline-flex"
                     >
                       RSVP on Luma
                     </a>
@@ -86,7 +98,7 @@ export default function UpcomingEvent({
                   </Link>
                 </div>
               </div>
-            </div>
+            </article>
           </Reveal>
         ) : (
           <p className="mt-14 text-center text-sm text-white/60">

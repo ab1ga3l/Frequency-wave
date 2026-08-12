@@ -2,7 +2,7 @@
 
 /**
  * Wave AI — Frequency Wave's ElevenLabs conversational concierge.
- * Floating glass widget with text + voice modes.
+ * Compact landing (no FAQ scroll, no gradient chrome); chat still scrolls.
  * Connects through a signed URL minted server-side so the API key never
  * reaches the browser.
  */
@@ -351,35 +351,41 @@ export default function AiConcierge() {
               setTooltipDismissed(true);
               setState('landing');
             }}
-            className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-violet to-blue text-2xl shadow-glow-blue transition-transform hover:scale-110"
+            className="group relative flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-[#040B24]/90 text-2xl backdrop-blur-md transition-transform hover:scale-110"
             aria-label="Chat with Abby"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
-            <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full border-2 border-navy bg-cyan animate-pulse-dot" />
+            <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#040B24] bg-white" />
           </button>
         </div>
       )}
 
       {/* Panel */}
       {state !== 'closed' && (
-        <div className="fixed inset-x-3 bottom-3 z-[70] flex max-h-[min(640px,calc(100dvh-1.5rem))] w-auto flex-col overflow-hidden rounded-[28px] border border-white/15 bg-white/[0.08] shadow-2xl shadow-black/50 backdrop-blur-md sm:inset-auto sm:bottom-8 sm:right-8 sm:h-[560px] sm:max-h-[82vh] sm:w-[380px] sm:rounded-[40px]">
+        <div
+          className={`fixed inset-x-3 bottom-3 z-[70] flex w-auto flex-col overflow-hidden rounded-[28px] border border-white/15 bg-[#040B24]/92 shadow-2xl shadow-black/50 backdrop-blur-md sm:inset-auto sm:bottom-8 sm:right-8 sm:w-[380px] sm:rounded-[40px] ${
+            state === 'chat'
+              ? 'h-[min(520px,calc(100dvh-1.5rem))]'
+              : ''
+          }`}
+        >
           {/* Header */}
-          <div className="shrink-0 border-b border-white/10 px-4 py-3 sm:px-5 sm:py-3.5">
+          <div className="shrink-0 border-b border-white/10 px-4 py-3 sm:px-5">
             <div className="flex items-center justify-between">
               <div className="flex min-w-0 items-center gap-3">
                 <div className="relative shrink-0">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-violet to-blue text-lg">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
                   </div>
                   {isConnected && (
-                    <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-white/20 bg-cyan" />
+                    <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#040B24] bg-white" />
                   )}
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-display text-base font-bold italic leading-none text-white sm:text-lg">
-                    <span className="g-text-anim">Abby</span>
+                    Abby
                   </h3>
-                  <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-cyan/70">
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-white/45">
                     {statusLabel}
                   </p>
                 </div>
@@ -396,54 +402,44 @@ export default function AiConcierge() {
 
           {/* Landing */}
           {state === 'landing' && (
-            <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-4 py-4 sm:px-5">
-              <div className="shrink-0 text-center">
-                <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-violet via-blue to-cyan shadow-glow-violet">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
-                </div>
-                <h3 className="font-display text-lg font-bold italic text-white">
-                  Chat with <span className="g-text-anim">Abby</span>
-                </h3>
-                <p className="mx-auto mt-1.5 max-w-[260px] text-xs leading-relaxed text-white/50">
-                  Ask about events, invites, sponsorship, and performing.
-                </p>
-              </div>
+            <div className="px-4 py-4 sm:px-5">
+              <p className="text-xs leading-relaxed text-white/50">
+                Ask about events, invites, sponsorship, and performing.
+              </p>
 
-              <div className="mt-4 grid shrink-0 grid-cols-2 gap-2.5">
+              <div className="mt-3 grid grid-cols-2 gap-2">
                 <button
                   onClick={() => handleStartChat('text')}
-                  className="group flex flex-col items-center gap-1.5 rounded-2xl border border-white/15 bg-white/[0.04] p-3 transition-all hover:border-cyan/40 hover:bg-white/[0.08]"
+                  className="flex flex-col items-center gap-1.5 rounded-2xl border border-white/15 bg-white/[0.04] p-3 transition-colors hover:bg-white/[0.08]"
                 >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5 text-cyan" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3.75H12m9 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5 text-white/80" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3.75H12m9 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
                   <span className="text-[11px] font-semibold text-white">
                     Start with Text
                   </span>
                 </button>
                 <button
                   onClick={() => handleStartChat('voice')}
-                  className="group flex flex-col items-center gap-1.5 rounded-2xl border border-white/15 bg-white/[0.04] p-3 transition-all hover:border-cyan/40 hover:bg-white/[0.08]"
+                  className="flex flex-col items-center gap-1.5 rounded-2xl border border-white/15 bg-white/[0.04] p-3 transition-colors hover:bg-white/[0.08]"
                 >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5 text-cyan" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3z" /></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5 text-white/80" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3z" /></svg>
                   <span className="text-[11px] font-semibold text-white">
                     Start with Voice
                   </span>
                 </button>
               </div>
 
-              <p className="mb-2 mt-4 shrink-0 font-mono text-[10px] uppercase tracking-widest text-white/30">
+              <p className="mb-2 mt-4 font-mono text-[10px] uppercase tracking-widest text-white/30">
                 Frequently Asked
               </p>
-              <div className="min-h-0 flex-1 space-y-1.5 overflow-y-auto">
+              <div className="space-y-1.5">
                 {FAQS.map((faq) => (
                   <button
                     key={faq}
                     onClick={() => handleStartChat('text', faq)}
-                    className="group flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-left text-xs text-white/70 transition-all hover:border-cyan/30 hover:bg-white/[0.08] hover:text-white"
+                    className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-3.5 py-2 text-left text-xs text-white/70 transition-colors hover:bg-white/[0.08] hover:text-white"
                   >
                     <span className="pr-2">{faq}</span>
-                    <span className="shrink-0 text-cyan/40 transition-transform group-hover:translate-x-0.5 group-hover:text-cyan">
-                      →
-                    </span>
+                    <span className="shrink-0 text-white/35">→</span>
                   </button>
                 ))}
               </div>
@@ -477,7 +473,7 @@ export default function AiConcierge() {
                     className={`flex items-end gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     {msg.role === 'agent' && (
-                      <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet to-blue text-xs">
+                      <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 text-xs">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-3.5 w-3.5 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
                       </div>
                     )}
