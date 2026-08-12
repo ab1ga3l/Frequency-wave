@@ -13,7 +13,7 @@ export default function SectionHeading({
 }) {
   return (
     <div className="text-center">
-      <h2 className="font-display text-4xl font-bold italic leading-tight sm:text-5xl">
+      <h2 className="font-display text-[2rem] font-bold italic leading-tight sm:text-4xl lg:text-5xl">
         <span className="text-cyan">{accent}</span>{' '}
         <span className="text-white">{rest}</span>
       </h2>
@@ -37,7 +37,7 @@ export default function SectionHeading({
           className="opacity-70"
         />
       </svg>
-      <p className="mt-3 text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-white/60">
+      <p className="mt-3 px-2 text-[0.62rem] font-semibold uppercase leading-relaxed tracking-[0.18em] text-white/60 sm:text-[0.7rem] sm:tracking-[0.25em]">
         {subtitle}
       </p>
     </div>

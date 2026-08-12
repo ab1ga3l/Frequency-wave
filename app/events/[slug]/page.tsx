@@ -9,11 +9,13 @@ import Nav from '@/components/site/Nav';
 import Reveal from '@/components/site/Reveal';
 import SectionHeading from '@/components/site/SectionHeading';
 import SubscribeCard from '@/components/site/SubscribeCard';
+import JsonLd from '@/components/site/JsonLd';
 import {
   fmtDateTimeLine,
   fmtRange,
   isUpcomingDate,
 } from '@/components/site/format';
+import { eventJsonLd } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,14 +25,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const event = await getEventBySlug(slug);
   if (!event || event.status !== 'published') {
-    return { title: 'Event Not Found — Frequency Wave' };
+    return { title: 'Event Not Found' };
   }
   return {
-    title: `${event.title} — Frequency Wave`,
+    title: event.title,
     description:
       event.tagline ??
       event.description.slice(0, 160) ??
       'A Frequency Wave experience.',
+    alternates: { canonical: `/events/${event.slug}` },
+    openGraph: {
+      title: event.title,
+      description: event.tagline ?? event.description.slice(0, 160),
+      type: 'website',
+      url: `/events/${event.slug}`,
+      images: event.coverImage
+        ? [{ url: event.coverImage, alt: `${event.title} — Frequency Wave` }]
+        : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: event.title,
+      description: event.tagline ?? event.description.slice(0, 160),
+      images: event.coverImage ? [event.coverImage] : undefined,
+    },
   };
 }
 
@@ -48,6 +66,7 @@ export default async function EventPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={eventJsonLd(event)} />
       <Nav />
       <main>
         {/* Hero photo band */}
@@ -58,7 +77,7 @@ export default async function EventPage({ params }: Props) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={event.coverImage ?? '/images/unplugged-poster.jpg'}
-            alt=""
+            alt={`${event.title} — ${dateLine}, ${location}. Where Web3 meets music and culture.`}
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div
@@ -66,7 +85,7 @@ export default async function EventPage({ params }: Props) {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(90deg, rgba(4,11,36,0.94) 0%, rgba(4,11,36,0.72) 45%, rgba(4,11,36,0.45) 100%)',
+                'linear-gradient(90deg, rgba(4,11,36,0.96) 0%, rgba(4,11,36,0.82) 48%, rgba(4,11,36,0.62) 100%)',
             }}
           />
 

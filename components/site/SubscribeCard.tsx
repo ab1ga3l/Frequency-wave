@@ -18,7 +18,7 @@ export default function SubscribeCard() {
       className="relative z-20 px-5 pb-8 pt-4 sm:px-6 sm:pb-10"
     >
       <Reveal className="mx-auto max-w-5xl">
-        <div className="rounded-[40px] border border-white/15 bg-white/[0.06] px-6 py-8 backdrop-blur-md sm:px-10 sm:py-10">
+        <div className="rounded-[28px] border border-white/15 bg-white/[0.06] px-4 py-7 backdrop-blur-md sm:rounded-[40px] sm:px-10 sm:py-10">
           {state?.ok ? (
             <div role="status" className="text-center">
               <p className="font-display text-3xl italic text-white">

@@ -25,11 +25,11 @@ export default function Nav() {
       >
         <Link
           href="/"
-          className="flex items-center gap-2.5"
+          className="flex min-w-0 items-center gap-2 sm:gap-2.5"
           onClick={() => setOpen(false)}
         >
-          <LogoMark className="h-8 w-auto" />
-          <span className="font-display text-2xl font-bold italic tracking-wide">
+          <LogoMark className="h-7 w-auto shrink-0 sm:h-8" />
+          <span className="truncate font-display text-lg font-bold italic tracking-wide sm:text-2xl">
             <span className="text-white">Frequency</span>{' '}
             <span className="text-cyan">Wave</span>
           </span>

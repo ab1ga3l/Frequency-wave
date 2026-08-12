@@ -30,7 +30,7 @@ export default function Sponsorship() {
     <section
       id="sponsorship"
       aria-label="Sponsorship"
-      className="relative overflow-hidden py-24"
+      className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
     >
       <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-6">
         <Reveal>

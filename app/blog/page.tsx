@@ -9,9 +9,16 @@ import SubscribeCard from '@/components/site/SubscribeCard';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'The Frequency — Frequency Wave Blog',
+  title: 'The Frequency',
   description:
-    "Stories from Africa's tech × culture frontier — announcements, recaps and signals from the Frequency Wave crew.",
+    "Stories from Africa's tech × culture frontier — announcements, recaps and signals from the Frequency Wave crew in Nairobi and Kilifi.",
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'The Frequency — Frequency Wave Blog',
+    description:
+      "Stories from Africa's tech × culture frontier — announcements, recaps and signals from the Frequency Wave crew.",
+    url: '/blog',
+  },
 };
 
 const dateFmt = new Intl.DateTimeFormat('en-KE', {

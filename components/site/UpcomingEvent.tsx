@@ -28,33 +28,33 @@ export default function UpcomingEvent({
   past: PastWave[];
 }) {
   return (
-    <section id="events" aria-label="Events" className="relative overflow-hidden py-24">
+    <section id="events" aria-label="Events" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
       <WaveBand wash variant="wash" flip />
-      <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-5xl px-3 sm:px-6">
         <Reveal>
           <SectionHeading
             accent="Upcoming"
             rest="Event"
-            subtitle="Awaken The Frequency — The 2026 Activation"
+            subtitle="Frequency Wave Unplugged — 11 September 2026, Kilifi"
           />
         </Reveal>
 
         {event ? (
-          <Reveal className="mt-14">
-            <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+          <Reveal className="mt-10 sm:mt-14">
+            <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
               <div className="img-zoom">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={event.coverImage ?? '/images/unplugged-poster.jpg'}
                   alt={event.title}
-                  className="aspect-video w-full object-cover"
+                  className="aspect-square w-full object-contain"
                 />
               </div>
               <div>
-                <h3 className="font-display text-3xl font-bold italic text-white">
+                <h3 className="font-display text-2xl font-bold italic text-white sm:text-3xl">
                   {event.title}
                 </h3>
-                <p className="mt-3 font-mono text-xs uppercase tracking-widest text-cyan">
+                <p className="mt-3 font-mono text-[0.65rem] uppercase tracking-widest text-cyan sm:text-xs">
                   {event.dateRange} · {event.venueLine}
                 </p>
                 <div className="mt-5 flex flex-col gap-3">
@@ -70,7 +70,7 @@ export default function UpcomingEvent({
                       </p>
                     ))}
                 </div>
-                <div className="mt-7 flex flex-wrap gap-4">
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                   {event.registerUrl && (
                     <a
                       href={event.registerUrl}

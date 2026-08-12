@@ -1,4 +1,5 @@
 /** Public homepage: Frequency Wave hero, featured event, DJs, sponsors, contact, subscribe. */
+import type { Metadata } from 'next';
 import { getFeaturedEvent, getPastEvents } from '@/lib/queries';
 import ContactSection from '@/components/site/ContactSection';
 import CountdownStrip from '@/components/site/CountdownStrip';
@@ -6,6 +7,7 @@ import DjProfiles from '@/components/site/DjProfiles';
 import Footer from '@/components/site/Footer';
 import FounderQuote from '@/components/site/FounderQuote';
 import HeroBand from '@/components/site/HeroBand';
+import JsonLd from '@/components/site/JsonLd';
 import MarqueeStrip from '@/components/site/MarqueeStrip';
 import Nav from '@/components/site/Nav';
 import PageBackdrop from '@/components/site/PageBackdrop';
@@ -14,8 +16,45 @@ import SubscribeCard from '@/components/site/SubscribeCard';
 import UpcomingEvent from '@/components/site/UpcomingEvent';
 import WhoWeAre from '@/components/site/WhoWeAre';
 import { fmtDay, fmtMonth, fmtRange } from '@/components/site/format';
+import { SITE_TAGLINE, eventJsonLd } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const featured = await getFeaturedEvent();
+    if (!featured) return {};
+    const when = featured.startAt.toLocaleDateString('en-KE', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'Africa/Nairobi',
+    });
+    const place = [featured.city, featured.country].filter(Boolean).join(', ');
+    const description = [
+      featured.tagline,
+      `${featured.title} — ${when} in ${place}.`,
+      'Where Web3 meets music and culture. Limited capacity, RSVP required.',
+    ]
+      .filter(Boolean)
+      .join(' ');
+    return {
+      title: { absolute: `${featured.title} — ${SITE_TAGLINE}` },
+      description,
+      openGraph: {
+        title: featured.title,
+        description,
+        url: '/',
+      },
+      twitter: {
+        title: featured.title,
+        description,
+      },
+    };
+  } catch {
+    return {};
+  }
+}
 
 export default async function Home() {
   let featured = null;
@@ -36,7 +75,7 @@ export default async function Home() {
         description: featured.description,
         dateRange: fmtRange(featured.startAt, featured.endAt),
         venue: featured.venue,
-        venueLine: [featured.venue, featured.city].filter(Boolean).join(', '),
+        venueLine: [...new Set([featured.venue, featured.city].filter(Boolean))].join(', '),
         startAtISO: featured.startAt.toISOString(),
         registerUrl: featured.registerUrl,
         coverImage: featured.coverImage || '/images/unplugged-poster.jpg',
@@ -51,6 +90,7 @@ export default async function Home() {
 
   return (
     <>
+      {featured && <JsonLd data={eventJsonLd(featured)} />}
       <PageBackdrop />
       <Nav />
       <main className="relative z-10">

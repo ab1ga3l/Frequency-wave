@@ -17,7 +17,7 @@ export default function CountdownStrip({
   return (
     <section
       aria-label="Event countdown"
-      className="anim-gradient-bar px-6 py-4"
+      className="anim-gradient-bar px-4 py-4 sm:px-6"
     >
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
         <p className="font-display text-lg italic text-white sm:text-xl">

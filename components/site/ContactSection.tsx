@@ -118,7 +118,7 @@ export default function ContactSection() {
     <section
       id="contact"
       aria-label="Contact"
-      className="relative z-20 overflow-visible py-24"
+      className="relative z-20 overflow-visible py-16 sm:py-20 lg:py-24"
     >
       <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-6">
         <Reveal>

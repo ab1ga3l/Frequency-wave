@@ -33,14 +33,25 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPublishedPost(slug);
-  if (!post) return { title: 'Post not found — Frequency Wave' };
+  if (!post) return { title: 'Post not found' };
   return {
-    title: `${post.title} — Frequency Wave`,
+    title: post.title,
     description: post.excerpt || undefined,
+    alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt || undefined,
       type: 'article',
+      url: `/blog/${post.slug}`,
+      images: post.coverImage
+        ? [{ url: post.coverImage, alt: post.title }]
+        : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt || undefined,
+      images: post.coverImage ? [post.coverImage] : undefined,
     },
   };
 }
