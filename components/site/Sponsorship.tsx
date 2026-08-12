@@ -58,7 +58,7 @@ export default function Sponsorship() {
                 Become A Sponsor
               </a>
             </div>
-            <div className="img-zoom mx-auto w-full max-w-[280px] border border-white/10 lg:mx-0">
+            <div className="img-zoom border border-white/10">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/crowd.jpg"

@@ -18,7 +18,7 @@ export default function HeroBand({ event: _event }: { event: HeroEventCard | nul
       aria-label="Frequency Wave"
       className="relative min-h-[600px] overflow-hidden lg:min-h-[720px]"
     >
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-8 px-5 pb-32 pt-14 sm:px-6 lg:grid-cols-[1fr_1.15fr] lg:gap-10">
+      <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-8 px-5 pb-32 pt-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <div>
           <p className="hero-in hero-in-d1 font-mono text-xs font-semibold uppercase tracking-[0.28em] text-cyan">
             Africa&apos;s Tech-Entertainment Movement
@@ -31,7 +31,7 @@ export default function HeroBand({ event: _event }: { event: HeroEventCard | nul
             gid="hero-flow"
             className="hero-in hero-in-d2 mt-1 h-8 w-full max-w-lg opacity-90 sm:h-11"
           />
-          <p className="hero-in hero-in-d3 mt-4 font-display text-xl italic font-normal text-white/90 sm:text-2xl">
+          <p className="hero-in hero-in-d3 mt-4 font-display text-2xl italic font-normal text-white/90 sm:text-[1.7rem]">
             Awaken the Frequency.
           </p>
           <p className="hero-in hero-in-d4 mt-4 max-w-xl text-base font-medium leading-relaxed text-white/85 sm:text-lg">
@@ -50,7 +50,7 @@ export default function HeroBand({ event: _event }: { event: HeroEventCard | nul
 
         <aside
           aria-label="Unplugged event poster"
-          className="hero-in hero-in-d6 relative w-full max-w-xl justify-self-center lg:max-w-none lg:justify-self-stretch"
+          className="hero-in hero-in-d6 relative w-full max-w-md justify-self-center lg:max-w-[440px] lg:justify-self-end"
         >
           <div
             aria-hidden="true"

@@ -34,7 +34,7 @@ export default function DjProfiles() {
           {DJS.map((dj, i) => (
             <Reveal key={dj.image} delay={i * 90}>
               <article className="text-center">
-                <div className="img-zoom mx-auto max-w-[220px] border border-white/10">
+                <div className="img-zoom border border-white/10">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={dj.image}

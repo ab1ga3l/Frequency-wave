@@ -43,7 +43,7 @@ export default function RunOfShow() {
           {HIGHLIGHTS.map((h, i) => (
             <Reveal key={h.title} delay={i * 90}>
               <article>
-                <div className="img-zoom mx-auto max-w-[200px] border border-white/10">
+                <div className="img-zoom border border-white/10">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={h.image}

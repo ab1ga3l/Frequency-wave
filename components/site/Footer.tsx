@@ -1,12 +1,12 @@
-/** Slim footer with frequency lines rising from the bottom. */
+/** Slim footer with frequency lines rising up into the section above. */
 import WaveCanvas from './WaveCanvas';
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 overflow-hidden border-t border-white/10 bg-[#040B24]/20">
+    <footer className="relative z-20 border-t border-white/10 bg-[#040B24]/20">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-28 opacity-80 sm:h-36"
+        className="pointer-events-none absolute inset-x-0 -top-44 bottom-0 z-0 opacity-85 sm:-top-56"
       >
         <WaveCanvas variant="hero" flip />
       </div>

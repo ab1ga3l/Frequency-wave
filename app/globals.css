@@ -271,7 +271,7 @@ body {
   font-family: var(--font-bodoni), 'Bodoni Moda', serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(2.5rem, 7.5vw, 5.25rem);
+  font-size: clamp(2.85rem, 8.6vw, 6.1rem);
   line-height: 0.9;
   letter-spacing: 0.04em;
   color: #fff;
@@ -285,7 +285,7 @@ body {
   font-family: var(--font-bodoni), 'Bodoni Moda', serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(3.1rem, 10vw, 6.5rem);
+  font-size: clamp(3.55rem, 12vw, 7.6rem);
   line-height: 0.86;
   letter-spacing: 0.02em;
   background: linear-gradient(90deg, #00f8ff 0%, #7ad4ff 35%, #c9a6ff 70%, #6b00f5 100%);

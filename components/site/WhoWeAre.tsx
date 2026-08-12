@@ -37,7 +37,7 @@ export default function WhoWeAre() {
           <Reveal key={a.accent} delay={i * 90}>
             <div className="text-center">
               <div
-                className="img-zoom anim-float mx-auto h-[130px] w-[130px] overflow-hidden rounded-full ring-1 ring-white/20"
+                className="img-zoom anim-float mx-auto h-[180px] w-[180px] overflow-hidden rounded-full ring-1 ring-white/20"
                 style={{ animationDelay: `${i * 0.45}s` }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
