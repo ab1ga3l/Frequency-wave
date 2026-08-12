@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Reveal from './Reveal';
 import SectionHeading from './SectionHeading';
-import WaveBand from './WaveBand';
 
 const HIGHLIGHTS = [
   {
@@ -30,8 +29,7 @@ const HIGHLIGHTS = [
 /** Three photo highlight cards from the program, reference DJ-profiles layout. */
 export default function RunOfShow() {
   return (
-    <section id="program" aria-label="Run of show" className="relative overflow-hidden bg-[#10062e] py-24">
-      <WaveBand wash variant="wash" />
+    <section id="program" aria-label="Run of show" className="relative overflow-hidden py-24">
       <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-6">
         <Reveal>
           <SectionHeading
@@ -45,7 +43,7 @@ export default function RunOfShow() {
           {HIGHLIGHTS.map((h, i) => (
             <Reveal key={h.title} delay={i * 90}>
               <article>
-                <div className="img-zoom border border-white/10">
+                <div className="img-zoom mx-auto max-w-[200px] border border-white/10">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={h.image}

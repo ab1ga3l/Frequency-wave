@@ -4,7 +4,6 @@ import { useActionState, type ReactNode } from 'react';
 import { sendMessage, type ActionResult } from '@/app/actions/public';
 import Reveal from './Reveal';
 import SectionHeading from './SectionHeading';
-import WaveBand from './WaveBand';
 
 const SUBJECTS = [
   'Partnership',
@@ -115,8 +114,7 @@ export default function ContactSection() {
   >(async (_prev, formData) => sendMessage(formData), null);
 
   return (
-    <section id="contact" aria-label="Contact" className="relative overflow-hidden bg-[#10062e] py-24">
-      <WaveBand wash variant="wash" />
+    <section id="contact" aria-label="Contact" className="relative overflow-hidden py-24">
       <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-6">
         <Reveal>
           <SectionHeading

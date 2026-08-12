@@ -5,6 +5,8 @@ import { db, messages } from '@/lib/db';
 import { requireAdmin } from '@/lib/auth';
 import Sidebar from '@/components/admin/Sidebar';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Mission Control — Frequency Wave',
   robots: { index: false, follow: false },

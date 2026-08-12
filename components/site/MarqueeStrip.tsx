@@ -18,7 +18,7 @@ export default function MarqueeStrip() {
   return (
     <section
       aria-hidden="true"
-      className="overflow-hidden border-y border-white/10 bg-[#040B24] py-3"
+      className="overflow-hidden border-y border-white/10 bg-[#040B24]/20 py-3"
     >
       <div className="marquee-track gap-10 px-6">
         {row.map((item, i) => (

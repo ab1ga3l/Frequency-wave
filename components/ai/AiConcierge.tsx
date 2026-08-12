@@ -2,12 +2,14 @@
 
 /**
  * Wave AI — Frequency Wave's ElevenLabs conversational concierge.
- * Floating widget with text + voice modes. Connects through a signed URL
- * minted server-side so the API key never reaches the browser.
+ * Floating widget with text + voice modes. Header uses a looping flow-wave.
+ * Connects through a signed URL minted server-side so the API key never
+ * reaches the browser.
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import FlowWaveStrip from '@/components/site/FlowWaveStrip';
 
 const PUBLIC_AGENT_ID = process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID;
 
@@ -363,32 +365,38 @@ export default function AiConcierge() {
       {state !== 'closed' && (
         <div className="fixed bottom-0 right-0 z-[70] flex h-[100dvh] w-full flex-col overflow-hidden border-cyan/15 bg-navy-mid shadow-2xl shadow-black/60 sm:bottom-8 sm:right-8 sm:h-[620px] sm:max-h-[82vh] sm:w-[390px] sm:rounded-3xl sm:border">
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-white/[0.06] bg-navy/80 px-5 py-4 backdrop-blur-sm">
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-violet to-blue text-lg">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
+          <div className="relative overflow-hidden border-b border-white/[0.06] bg-navy/80 px-5 py-4 backdrop-blur-sm">
+            <FlowWaveStrip
+              gid="ai-flow"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-10 w-full opacity-70"
+            />
+            <div className="relative z-10 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-violet to-blue text-lg">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
+                  </div>
+                  {isConnected && (
+                    <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-navy-mid bg-cyan" />
+                  )}
                 </div>
-                {isConnected && (
-                  <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-navy-mid bg-cyan" />
-                )}
+                <div>
+                  <h3 className="font-display text-lg font-bold italic leading-none text-white">
+                    <span className="g-text-anim">Abby</span>
+                  </h3>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-cyan/70">
+                    {statusLabel}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-display text-sm font-bold text-white">
-                  Abby
-                </h3>
-                <p className="font-mono text-[10px] uppercase tracking-wider text-cyan/70">
-                  {statusLabel}
-                </p>
-              </div>
+              <button
+                onClick={handleClose}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-white/40 transition-colors hover:bg-white/5 hover:text-white"
+                aria-label="Close chat"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-4 w-4" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+              </button>
             </div>
-            <button
-              onClick={handleClose}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-white/40 transition-colors hover:bg-white/5 hover:text-white"
-              aria-label="Close chat"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-4 w-4" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
-            </button>
           </div>
 
           {/* Landing */}
@@ -398,8 +406,8 @@ export default function AiConcierge() {
                 <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-violet via-blue to-cyan text-4xl shadow-glow-violet">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-9 w-9 text-white" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4 13a8 8 0 1 1 16 0m-16 0v3a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5m15 2v3a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2" /></svg>
                 </div>
-                <h3 className="font-display text-lg font-extrabold text-white">
-                  Chat with <span className="g-text">Abby</span>
+                <h3 className="font-display text-xl font-bold italic text-white">
+                  Chat with <span className="g-text-anim">Abby</span>
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-white/50">
                   Frequency Wave&apos;s event guide — ask about upcoming

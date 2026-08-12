@@ -4,11 +4,11 @@ import WaveBand from './WaveBand';
 /** Centered founder quote with a small circular portrait. */
 export default function FounderQuote() {
   return (
-    <section aria-label="From the founder" className="relative overflow-hidden bg-[#040B24] py-20">
+    <section aria-label="From the founder" className="relative overflow-hidden py-20">
       <WaveBand wash variant="wash" flip />
       <Reveal className="relative z-10">
         <figure className="mx-auto max-w-2xl px-5 text-center sm:px-6">
-          <div className="anim-ring mx-auto h-[72px] w-[72px] overflow-hidden rounded-full ring-1 ring-cyan/40">
+          <div className="anim-ring mx-auto h-[56px] w-[56px] overflow-hidden rounded-full ring-1 ring-cyan/40">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/dj.jpg"

@@ -3,7 +3,7 @@
 /* ════════════════════════════════════════════════════════════
    FREQUENCY WAVE — Design System
    Matched to the Unplugged poster: cyan → blue → violet
-   Display: Cormorant Garamond (flowy event serif) · Poster: Bebas Neue (UNPLUGGED)
+   Display: Bodoni Moda (high-contrast luxury serif) · Poster: Bebas Neue (UNPLUGGED)
    ════════════════════════════════════════════════════════════ */
 
 @theme {
@@ -19,7 +19,7 @@
   --color-magenta: #e93cac;
 
   /* Fonts (variables injected by next/font in app/layout.tsx) */
-  --font-display: var(--font-cormorant), serif;
+  --font-display: var(--font-bodoni), serif;
   --font-poster: var(--font-bebas), sans-serif;
   --font-body: var(--font-inter), sans-serif;
   --font-mono: var(--font-space-mono), monospace;
@@ -75,6 +75,33 @@
     0%, 100% { box-shadow: 0 0 0 0 rgba(0, 248, 255, 0.45); }
     50% { box-shadow: 0 0 0 10px rgba(0, 248, 255, 0); }
   }
+  @keyframes flow-letter {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-9px) rotate(-3deg); }
+    75% { transform: translateY(5px) rotate(2deg); }
+  }
+  @keyframes flow-wave-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+@keyframes flow-letter {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-9px) rotate(-3deg); }
+  75% { transform: translateY(5px) rotate(2deg); }
+}
+@keyframes flow-wave-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes rgb-drift-cyan {
+  0%, 100% { transform: translate(-3px, 2px); }
+  50% { transform: translate(-7px, -1px); }
+}
+@keyframes rgb-drift-mag {
+  0%, 100% { transform: translate(4px, -2px); }
+  50% { transform: translate(7px, 3px); }
 }
 
 html {
@@ -230,6 +257,47 @@ body {
 .anim-ken { animation: ken-burns 22s ease-in-out infinite alternate; }
 .anim-ring { animation: ring-pulse 2.8s ease-out infinite; }
 
+.flow-letter {
+  display: inline-block;
+  will-change: transform;
+  animation: flow-letter 2.8s ease-in-out infinite;
+}
+.flow-wave-track {
+  animation: flow-wave-slide 9s linear infinite;
+}
+
+.hero-freq {
+  display: block;
+  font-family: var(--font-bodoni), 'Bodoni Moda', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 7.5vw, 5.25rem);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.45);
+}
+
+.hero-wave {
+  display: block;
+  margin-top: -0.06em;
+  margin-left: 0.06em;
+  font-family: var(--font-bodoni), 'Bodoni Moda', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(3.1rem, 10vw, 6.5rem);
+  line-height: 0.86;
+  letter-spacing: 0.02em;
+  background: linear-gradient(90deg, #00f8ff 0%, #7ad4ff 35%, #c9a6ff 70%, #6b00f5 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: g-shift 5s ease infinite alternate;
+  filter: drop-shadow(0 2px 18px rgba(0, 0, 0, 0.35));
+}
+
 .g-text-anim {
   background: linear-gradient(90deg, #00f8ff 0%, #265bff 40%, #6b00f5 70%, #00f8ff 100%);
   background-size: 200% auto;
@@ -269,8 +337,11 @@ body {
   .anim-ken,
   .anim-ring,
   .g-text-anim,
+  .hero-wave,
   .anim-gradient-bar,
   .marquee-track,
+  .flow-letter,
+  .flow-wave-track,
   .btn-primary:hover::after {
     animation: none !important;
   }

@@ -4,7 +4,6 @@ import { desc, eq } from 'drizzle-orm';
 import { db, posts } from '@/lib/db';
 import Nav from '@/components/site/Nav';
 import Footer from '@/components/site/Footer';
-import WaveBand from '@/components/site/WaveBand';
 
 export const dynamic = 'force-dynamic';
 
@@ -39,7 +38,6 @@ export default async function BlogPage() {
 
       {/* Heading band */}
       <section className="relative overflow-hidden bg-[#040B24] px-5 pb-16 pt-20 text-center sm:px-6 sm:pt-24">
-        <WaveBand wash variant="wash" />
         <div className="relative z-10">
         <h1 className="font-display text-5xl font-bold italic sm:text-6xl">
           <span className="text-cyan">The</span>{' '}

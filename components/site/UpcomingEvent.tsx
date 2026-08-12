@@ -28,7 +28,7 @@ export default function UpcomingEvent({
   past: PastWave[];
 }) {
   return (
-    <section id="events" aria-label="Events" className="relative overflow-hidden bg-[#040B24] py-24">
+    <section id="events" aria-label="Events" className="relative overflow-hidden py-24">
       <WaveBand wash variant="wash" flip />
       <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-6">
         <Reveal>
@@ -41,8 +41,8 @@ export default function UpcomingEvent({
 
         {event ? (
           <Reveal className="mt-14">
-            <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
-              <div className="img-zoom border border-white/10">
+            <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+              <div className="img-zoom mx-auto w-full max-w-[280px] border border-white/10 lg:mx-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={event.coverImage ?? '/images/unplugged-poster.jpg'}

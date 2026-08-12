@@ -19,7 +19,7 @@ const DJS = [
 /** Two DJ profile cards, names pending the client's lineup announcement. */
 export default function DjProfiles() {
   return (
-    <section id="djs" aria-label="DJ profiles" className="relative overflow-hidden bg-[#040B24] py-24">
+    <section id="djs" aria-label="DJ profiles" className="relative overflow-hidden py-24">
       <WaveBand wash variant="wash" flip />
       <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-6">
         <Reveal>
@@ -34,7 +34,7 @@ export default function DjProfiles() {
           {DJS.map((dj, i) => (
             <Reveal key={dj.image} delay={i * 90}>
               <article className="text-center">
-                <div className="img-zoom border border-white/10">
+                <div className="img-zoom mx-auto max-w-[220px] border border-white/10">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={dj.image}

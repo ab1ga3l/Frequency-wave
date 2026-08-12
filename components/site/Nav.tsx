@@ -19,7 +19,7 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 h-16 border-b border-white/10 bg-[#040B24]">
+    <header className="sticky top-0 z-50 h-16 border-b border-white/10 bg-[#040B24]/70 backdrop-blur-md">
       <nav
         aria-label="Main navigation"
         className="mx-auto flex h-full max-w-6xl items-center justify-between px-5 sm:px-6"
@@ -91,7 +91,7 @@ export default function Nav() {
 
       {/* Mobile dropdown panel */}
       {open && (
-        <div className="border-b border-white/10 bg-[#040B24] md:hidden">
+        <div className="border-b border-white/10 bg-[#040B24]/90 backdrop-blur-md md:hidden">
           <nav
             aria-label="Mobile navigation"
             className="mx-auto flex max-w-6xl flex-col px-5 py-4 sm:px-6"

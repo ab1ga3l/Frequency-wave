@@ -8,7 +8,6 @@ import IcsButton from '@/components/site/IcsButton';
 import Nav from '@/components/site/Nav';
 import Reveal from '@/components/site/Reveal';
 import SectionHeading from '@/components/site/SectionHeading';
-import WaveCanvas from '@/components/site/WaveCanvas';
 import {
   fmtDateTimeLine,
   fmtRange,
@@ -147,12 +146,6 @@ export default async function EventPage({ params }: Props) {
                 )}
               </div>
             </div>
-          </div>
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-40 opacity-70"
-          >
-            <WaveCanvas variant="hero" />
           </div>
         </section>
 

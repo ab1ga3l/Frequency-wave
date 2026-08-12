@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
-import { Bebas_Neue, Cormorant_Garamond, Inter, Space_Mono } from 'next/font/google';
+import { Bebas_Neue, Bodoni_Moda, Inter, Space_Mono } from 'next/font/google';
 import AiConcierge from '@/components/ai/AiConcierge';
 import './globals.css';
 
-const cormorant = Cormorant_Garamond({
+const bodoni = Bodoni_Moda({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '900'],
   style: ['normal', 'italic'],
-  variable: '--font-cormorant',
+  variable: '--font-bodoni',
 });
 
 const bebas = Bebas_Neue({
@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cormorant.variable} ${bebas.variable} ${inter.variable} ${spaceMono.variable} antialiased`}
+        className={`${bodoni.variable} ${bebas.variable} ${inter.variable} ${spaceMono.variable} antialiased`}
       >
         {children}
         <AiConcierge />

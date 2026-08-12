@@ -1,5 +1,4 @@
 import Reveal from './Reveal';
-import WaveBand from './WaveBand';
 
 const AUDIENCES = [
   {
@@ -31,15 +30,14 @@ export default function WhoWeAre() {
     <section
       id="about"
       aria-label="Who we are"
-      className="relative overflow-hidden bg-[#10062e] py-24"
+      className="relative overflow-hidden py-24"
     >
-      <WaveBand wash variant="wash" />
       <div className="relative z-10 mx-auto grid max-w-5xl gap-10 px-5 sm:px-6 md:grid-cols-3">
         {AUDIENCES.map((a, i) => (
           <Reveal key={a.accent} delay={i * 90}>
             <div className="text-center">
               <div
-                className="img-zoom anim-float mx-auto h-[180px] w-[180px] overflow-hidden rounded-full ring-1 ring-white/20"
+                className="img-zoom anim-float mx-auto h-[130px] w-[130px] overflow-hidden rounded-full ring-1 ring-white/20"
                 style={{ animationDelay: `${i * 0.45}s` }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}

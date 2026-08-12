@@ -1,4 +1,4 @@
-/** Public homepage: Unplugged hero, featured event, program, DJs, sponsors, contact. */
+/** Public homepage: Frequency Wave hero, featured event, program, DJs, sponsors, contact. */
 import { getFeaturedEvent, getPastEvents } from '@/lib/queries';
 import ContactSection from '@/components/site/ContactSection';
 import CountdownStrip from '@/components/site/CountdownStrip';
@@ -8,10 +8,10 @@ import FounderQuote from '@/components/site/FounderQuote';
 import HeroBand from '@/components/site/HeroBand';
 import MarqueeStrip from '@/components/site/MarqueeStrip';
 import Nav from '@/components/site/Nav';
+import PageBackdrop from '@/components/site/PageBackdrop';
 import RunOfShow from '@/components/site/RunOfShow';
 import Sponsorship from '@/components/site/Sponsorship';
 import UpcomingEvent from '@/components/site/UpcomingEvent';
-import WaveBand from '@/components/site/WaveBand';
 import WhoWeAre from '@/components/site/WhoWeAre';
 import { fmtDay, fmtMonth, fmtRange } from '@/components/site/format';
 
@@ -51,8 +51,9 @@ export default async function Home() {
 
   return (
     <>
+      <PageBackdrop />
       <Nav />
-      <main>
+      <main className="relative z-10">
         <HeroBand event={featuredData} />
         {featuredData && (
           <CountdownStrip
@@ -67,7 +68,6 @@ export default async function Home() {
         )}
         <MarqueeStrip />
         <WhoWeAre />
-        <WaveBand />
         <UpcomingEvent
           event={
             featuredData
@@ -84,17 +84,11 @@ export default async function Home() {
           }
           past={pastWaves}
         />
-        <WaveBand flip />
         <RunOfShow />
-        <WaveBand />
         <DjProfiles />
-        <WaveBand flip />
         <Sponsorship />
-        <WaveBand />
         <FounderQuote />
-        <WaveBand flip />
         <ContactSection />
-        <WaveBand />
       </main>
       <Footer />
     </>

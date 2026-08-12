@@ -1,6 +1,5 @@
 import Reveal from './Reveal';
 import SectionHeading from './SectionHeading';
-import WaveBand from './WaveBand';
 
 const TIERS = [
   {
@@ -31,9 +30,8 @@ export default function Sponsorship() {
     <section
       id="sponsorship"
       aria-label="Sponsorship"
-      className="relative overflow-hidden bg-[#10062e] py-24"
+      className="relative overflow-hidden py-24"
     >
-      <WaveBand wash variant="wash" />
       <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-6">
         <Reveal>
           <SectionHeading
@@ -60,7 +58,7 @@ export default function Sponsorship() {
                 Become A Sponsor
               </a>
             </div>
-            <div className="img-zoom border border-white/10">
+            <div className="img-zoom mx-auto w-full max-w-[280px] border border-white/10 lg:mx-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/crowd.jpg"
