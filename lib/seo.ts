@@ -10,6 +10,13 @@ export const SITE_DESCRIPTION =
   'Frequency Wave is Africa’s tech-entertainment movement from Nairobi. Frequency Wave Unplugged — 11 September 2026 in Kilifi, Kenya — where Web3 meets music and culture. Limited capacity, RSVP required.';
 export const DEFAULT_OG_IMAGE = '/images/fw-mark.png';
 export const SITE_EMAIL = 'frequencywave101@gmail.com';
+export const UNPLUGGED_RSVP_URL = 'https://luma.com/4bval6lt';
+
+export function eventRsvpUrl(event: { slug: string; registerUrl?: string | null }) {
+  if (event.registerUrl) return event.registerUrl;
+  if (event.slug === 'ethsafari-2026') return UNPLUGGED_RSVP_URL;
+  return null;
+}
 
 export function absUrl(path: string) {
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
@@ -89,10 +96,10 @@ export function eventJsonLd(event: {
       url: SITE_URL,
       email: SITE_EMAIL,
     },
-    offers: event.registerUrl
+    offers: eventRsvpUrl(event)
       ? {
           '@type': 'Offer',
-          url: event.registerUrl,
+          url: eventRsvpUrl(event),
           availability: 'https://schema.org/LimitedAvailability',
         }
       : undefined,

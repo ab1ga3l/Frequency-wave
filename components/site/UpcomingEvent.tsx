@@ -78,7 +78,7 @@ export default function UpcomingEvent({
                       rel="noopener noreferrer"
                       className="btn-primary"
                     >
-                      Register Now
+                      RSVP on Luma
                     </a>
                   )}
                   <Link href={`/events/${event.slug}`} className="btn-outline">

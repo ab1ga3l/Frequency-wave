@@ -32,7 +32,7 @@ export default function CountdownStrip({
               rel="noopener noreferrer"
               className="rounded-full bg-[#040B24] px-6 py-2.5 text-xs font-semibold tracking-wide text-white transition-colors hover:bg-black"
             >
-              Register
+              RSVP on Luma
             </a>
           )}
         </div>

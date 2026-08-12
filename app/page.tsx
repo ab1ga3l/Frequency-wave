@@ -16,7 +16,7 @@ import SubscribeCard from '@/components/site/SubscribeCard';
 import UpcomingEvent from '@/components/site/UpcomingEvent';
 import WhoWeAre from '@/components/site/WhoWeAre';
 import { fmtDay, fmtMonth, fmtRange } from '@/components/site/format';
-import { SITE_TAGLINE, eventJsonLd } from '@/lib/seo';
+import { SITE_TAGLINE, eventJsonLd, eventRsvpUrl } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -77,7 +77,7 @@ export default async function Home() {
         venue: featured.venue,
         venueLine: [...new Set([featured.venue, featured.city].filter(Boolean))].join(', '),
         startAtISO: featured.startAt.toISOString(),
-        registerUrl: featured.registerUrl,
+        registerUrl: eventRsvpUrl(featured),
         coverImage: featured.coverImage || '/images/unplugged-poster.jpg',
       }
     : null;

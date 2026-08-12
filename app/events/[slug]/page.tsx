@@ -15,7 +15,7 @@ import {
   fmtRange,
   isUpcomingDate,
 } from '@/components/site/format';
-import { eventJsonLd } from '@/lib/seo';
+import { eventJsonLd, eventRsvpUrl } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -63,10 +63,11 @@ export default async function EventPage({ params }: Props) {
   const location = [event.venue, event.city, event.country]
     .filter(Boolean)
     .join(', ');
+  const rsvpUrl = eventRsvpUrl(event);
 
   return (
     <>
-      <JsonLd data={eventJsonLd(event)} />
+      <JsonLd data={eventJsonLd({ ...event, registerUrl: rsvpUrl })} />
       <Nav />
       <main>
         {/* Hero photo band */}
@@ -131,14 +132,14 @@ export default async function EventPage({ params }: Props) {
               )}
 
               <div className="mt-8 flex flex-wrap gap-4">
-                {isUpcoming && event.registerUrl && (
+                {isUpcoming && rsvpUrl && (
                   <a
-                    href={event.registerUrl}
+                    href={rsvpUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary"
                   >
-                    Register Now
+                    RSVP on Luma
                   </a>
                 )}
                 {isUpcoming && (
@@ -149,14 +150,14 @@ export default async function EventPage({ params }: Props) {
                       location,
                       startISO: event.startAt.toISOString(),
                       endISO: event.endAt?.toISOString() ?? null,
-                      url: event.registerUrl,
+                      url: rsvpUrl,
                       slug: event.slug,
                     }}
                   />
                 )}
-                {!isUpcoming && event.registerUrl && (
+                {!isUpcoming && rsvpUrl && (
                   <a
-                    href={event.registerUrl}
+                    href={rsvpUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-outline"

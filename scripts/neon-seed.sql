@@ -31,7 +31,7 @@ INSERT INTO events (
   'Kilifi',
   'Kenya',
   'Limited capacity / RSVP required',
-  NULL,
+  'https://luma.com/4bval6lt',
   '/images/unplugged-poster.jpg',
   ARRAY['ETHSafari','Unplugged','Music','Web3'],
   'published',
@@ -105,3 +105,7 @@ JOIN (VALUES
 WHERE NOT EXISTS (
   SELECT 1 FROM agenda_items ai WHERE ai.event_id = e.id AND ai.title = a.title
 );
+
+UPDATE events
+SET register_url = 'https://luma.com/4bval6lt'
+WHERE slug = 'ethsafari-2026';

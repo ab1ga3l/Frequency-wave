@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import FlowWaveStrip from './FlowWaveStrip';
 import WaveCanvas from './WaveCanvas';
+import { UNPLUGGED_RSVP_URL } from '@/lib/seo';
 
 export type HeroEventCard = {
   slug: string;
@@ -14,6 +15,7 @@ export type HeroEventCard = {
 
 export default function HeroBand({ event }: { event: HeroEventCard | null }) {
   const poster = event?.coverImage || '/images/unplugged-poster.jpg';
+  const rsvpUrl = event?.registerUrl || UNPLUGGED_RSVP_URL;
   const posterAlt = event
     ? `${event.title} — ${event.dateRange}, ${event.venue}. Where Web3 meets music and culture.`
     : 'Frequency Wave Unplugged — 11 September 2026, Kilifi, Kenya';
@@ -72,6 +74,18 @@ export default function HeroBand({ event }: { event: HeroEventCard | null }) {
               alt={posterAlt}
               className="aspect-square w-full object-cover"
             />
+            {rsvpUrl && (
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#040B24]/90 via-[#040B24]/40 to-transparent px-4 pb-4 pt-16">
+                <a
+                  href={rsvpUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary !w-full"
+                >
+                  RSVP on Luma
+                </a>
+              </div>
+            )}
           </div>
           {event && (
             <div className="relative mt-5 text-center lg:text-left">
