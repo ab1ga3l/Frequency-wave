@@ -2,7 +2,6 @@
 import type { Metadata } from 'next';
 import { getFeaturedEvent, getPastEvents } from '@/lib/queries';
 import ContactSection from '@/components/site/ContactSection';
-import CountdownStrip from '@/components/site/CountdownStrip';
 import DjProfiles from '@/components/site/DjProfiles';
 import Footer from '@/components/site/Footer';
 import FounderQuote from '@/components/site/FounderQuote';
@@ -93,15 +92,6 @@ export default async function Home() {
       <Nav />
       <main className="relative z-10">
         <HeroBand event={featuredData} />
-        <CountdownStrip
-          event={{
-            title: featuredData.title,
-            dateRange: featuredData.dateRange,
-            venue: featuredData.venue,
-            startAtISO: featuredData.startAtISO,
-            registerUrl: featuredData.registerUrl,
-          }}
-        />
         <MarqueeStrip />
         <WhoWeAre />
         <UpcomingEvent
