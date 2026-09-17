@@ -2,17 +2,16 @@ import Reveal from './Reveal';
 import SectionHeading from './SectionHeading';
 import WaveBand from './WaveBand';
 
-// Placeholder lineup: replace name/photo per DJ once the client confirms.
 const DJS = [
   {
     image: '/images/dj.jpg',
-    alt: 'DJ silhouette behind the decks in stage light',
-    text: 'Lineup reveal loading. Follow @the_wave_africa for the drop.',
+    alt: 'Female DJ profile placeholder',
+    text: 'DJ announcing soon.',
   },
   {
     image: '/images/dj2.jpg',
-    alt: 'DJ performing at night under stage light',
-    text: 'Second selector locked in. Name drops soon.',
+    alt: 'Male DJ profile placeholder',
+    text: 'DJ announcing soon.',
   },
 ];
 
@@ -32,7 +31,7 @@ export default function DjProfiles() {
 
         <div className="mx-auto mt-14 grid max-w-3xl gap-8 sm:grid-cols-2">
           {DJS.map((dj, i) => (
-            <Reveal key={dj.image} delay={i * 90}>
+            <Reveal key={`${dj.image}-${i}`} delay={i * 90}>
               <article className="text-center">
                 <div className="img-zoom">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

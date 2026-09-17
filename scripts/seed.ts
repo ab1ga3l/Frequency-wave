@@ -19,31 +19,31 @@ async function main() {
   }
 
   // ── Real past event ──
-  const [meetGreet] = await db
+  const [waveSocial] = await db
     .insert(events)
     .values({
-      slug: 'the-wave-meet-and-greet',
-      title: 'The Wave Meet & Greet',
-      tagline: 'Scouting. Connecting. Building.',
+      slug: 'the-wave-social',
+      title: 'The Wave Social',
+      tagline: 'Play. Connect. Catch the wave.',
       description:
-        'An intimate, curated gathering of Web3 projects, investors, VCs, and cultural innovators. 50–70 attendees. Scouting. Connecting. Building.',
-      startAt: new Date('2025-03-28T17:00:00+03:00'),
-      venue: 'Blockchain Centre',
+        'An evening of board games, Jenga, darts, card games, music, culture, DJs, and community. Join Frequency Wave at Jenga Jungle Restaurant for The Wave Social.',
+      startAt: new Date('2026-10-10T16:00:00+03:00'),
+      venue: 'Jenga Jungle Restaurant',
       city: 'Nairobi',
       country: 'Kenya',
-      capacity: '50–70 curated attendees',
-      registerUrl: 'https://lu.ma/p03wsfdo',
-      tags: ['Web3', 'Networking', 'Invite Only'],
+      capacity: 'Limited capacity',
+      registerUrl: 'https://apps.little.africa/events/324',
+      coverImage: '/images/homepage.jpeg',
+      tags: ['Social', 'Games', 'Music', 'Culture', 'DJs'],
       status: 'published',
-      featured: false,
+      featured: true,
     })
     .returning();
 
   await db.insert(agendaItems).values([
-    { eventId: meetGreet.id, timeLabel: '5:00 PM', title: 'Doors & Check-In', description: 'Arrivals, badges, and first connections.', sort: 0 },
-    { eventId: meetGreet.id, timeLabel: '5:30 PM', title: 'Founder Introductions', description: 'Web3 projects and builders introduce what they are shipping.', sort: 1 },
-    { eventId: meetGreet.id, timeLabel: '6:30 PM', title: 'Investor & VC Mixer', description: 'Curated networking between projects and capital.', sort: 2 },
-    { eventId: meetGreet.id, timeLabel: '8:00 PM', title: 'The Wave Social', description: 'Music, culture, and conversations that outlast the agenda.', sort: 3 },
+    { eventId: waveSocial.id, timeLabel: '4:00 PM', title: 'Doors Open', description: 'Arrive, connect, and settle into the Jenga Jungle.', sort: 0 },
+    { eventId: waveSocial.id, timeLabel: '4:00 PM', title: 'Games Available', description: 'Board games, Jenga, darts, card games, and more.', sort: 1 },
+    { eventId: waveSocial.id, timeLabel: 'Till late', title: 'Music, Culture & DJs', description: 'Catch the wave with music, community, and DJs.', sort: 2 },
   ]);
 
   // ── Draft concepts (dashboard-only until published with real dates) ──
@@ -89,7 +89,7 @@ async function main() {
     },
   ]);
 
-  console.log('Seeded: 1 published past event + 3 draft concepts.');
+  console.log('Seeded: 1 published upcoming event + 3 draft concepts.');
   await sql.end();
 }
 

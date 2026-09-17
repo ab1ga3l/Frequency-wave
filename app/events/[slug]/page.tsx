@@ -139,7 +139,7 @@ export default async function EventPage({ params }: Props) {
                     rel="noopener noreferrer"
                     className="btn-primary"
                   >
-                    RSVP on Luma
+                    RSVP
                   </a>
                 )}
                 {isUpcoming && (

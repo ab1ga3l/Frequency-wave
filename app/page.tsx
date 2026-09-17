@@ -12,7 +12,6 @@ import MarqueeStrip from '@/components/site/MarqueeStrip';
 import Nav from '@/components/site/Nav';
 import PageBackdrop from '@/components/site/PageBackdrop';
 import Sponsorship from '@/components/site/Sponsorship';
-import SubscribeCard from '@/components/site/SubscribeCard';
 import UpcomingEvent from '@/components/site/UpcomingEvent';
 import WhoWeAre from '@/components/site/WhoWeAre';
 import { fmtDay, fmtMonth, fmtRange } from '@/components/site/format';
@@ -68,19 +67,18 @@ export default async function Home() {
     // Public pages still render when the database is unreachable (e.g. first Vercel deploy).
   }
 
-  const featuredData = featured
-    ? {
-        slug: featured.slug,
-        title: featured.title,
-        description: featured.description,
-        dateRange: fmtRange(featured.startAt, featured.endAt),
-        venue: featured.venue,
-        venueLine: [...new Set([featured.venue, featured.city].filter(Boolean))].join(', '),
-        startAtISO: featured.startAt.toISOString(),
-        registerUrl: eventRsvpUrl(featured),
-        coverImage: featured.coverImage || '/images/unplugged-poster.jpg',
-      }
-    : null;
+  const featuredData = {
+    slug: featured?.slug ?? 'the-wave-social',
+    title: 'The Wave Social',
+    description:
+      'Frequency Wave presents The Wave Social — a laid-back evening designed for good people, good music, games, and genuine connection.\n\nForget the panels and pitches. This is your chance to step away from the usual event format and simply play, socialize, meet new people, and have a good time.\n\nExpect an evening filled with:\n🎲 Games & friendly competition — Jenga, Chase, cards, board games and more\n🎧 DJs & music throughout the evening\n🍹 Drinks & food available for purchase at the venue\n⚽ Fantasy Football Awards — winners announced live\n🤝 Good conversations & new connections with the Frequency Wave community',
+    dateRange: '10th October 2026',
+    venue: 'Jenga Jungle Restaurant',
+    venueLine: 'Jenga Jungle Restaurant',
+    startAtISO: '2026-10-10T16:00:00+03:00',
+    registerUrl: 'https://apps.little.africa/events/324',
+    coverImage: '/images/homepage.jpeg',
+  };
 
   const pastWaves = past.map((e) => ({
     slug: e.slug,
@@ -95,40 +93,33 @@ export default async function Home() {
       <Nav />
       <main className="relative z-10">
         <HeroBand event={featuredData} />
-        {featuredData && (
-          <CountdownStrip
-            event={{
-              title: featuredData.title,
-              dateRange: featuredData.dateRange,
-              venue: featuredData.venue,
-              startAtISO: featuredData.startAtISO,
-              registerUrl: featuredData.registerUrl,
-            }}
-          />
-        )}
+        <CountdownStrip
+          event={{
+            title: featuredData.title,
+            dateRange: featuredData.dateRange,
+            venue: featuredData.venue,
+            startAtISO: featuredData.startAtISO,
+            registerUrl: featuredData.registerUrl,
+          }}
+        />
         <MarqueeStrip />
         <WhoWeAre />
         <UpcomingEvent
-          event={
-            featuredData
-              ? {
-                  slug: featuredData.slug,
-                  title: featuredData.title,
-                  description: featuredData.description,
-                  dateRange: featuredData.dateRange,
-                  venueLine: featuredData.venueLine,
-                  registerUrl: featuredData.registerUrl,
-                  coverImage: featuredData.coverImage,
-                }
-              : null
-          }
+          event={{
+            slug: featuredData.slug,
+            title: featuredData.title,
+            description: featuredData.description,
+            dateRange: featuredData.dateRange,
+            venueLine: featuredData.venueLine,
+            registerUrl: featuredData.registerUrl,
+            coverImage: featuredData.coverImage,
+          }}
           past={pastWaves}
         />
         <DjProfiles />
         <Sponsorship />
         <FounderQuote />
         <ContactSection />
-        <SubscribeCard />
       </main>
       <Footer />
     </>

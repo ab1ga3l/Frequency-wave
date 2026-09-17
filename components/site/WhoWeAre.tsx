@@ -52,16 +52,10 @@ export default function WhoWeAre() {
 
         <Reveal className="mx-auto mt-10 max-w-3xl text-center">
           <p className="text-base leading-relaxed text-white/75 sm:text-lg">
-            Frequency Wave is a Nairobi-based movement at the intersection of
-            culture, tech, and Web3. We create immersive experiences that
-            educate, inspire, and accelerate Africa&apos;s builders and
-            innovators — blockchain panels beside DJ battles, NFTs meeting neon
-            lights.
+            Frequency Wave 🌊 is a Nairobi based movement at the intersection of culture, tech and Web3. We create massive experiences that educate, inspire and accelerate African builders and innovators.
           </p>
           <p className="mt-5 text-sm leading-relaxed text-white/55 sm:text-base">
-            Tech is shaping the future. Entertainment is shaping culture. We
-            build the room where both collide — events that move people
-            emotionally, culturally, and technologically. The 2026 theme is{' '}
+            Tech is shipping. Entertainment is shipping culture. We build the room where both collide — events that move people emotionally, culturally, and technologically. The 2026 theme is{' '}
             <span className="italic text-white/80">Awaken the Frequency</span>.
           </p>
         </Reveal>

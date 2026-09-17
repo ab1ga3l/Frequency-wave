@@ -2,14 +2,11 @@
 const ITEMS = [
   'Awaken the Frequency',
   'Nairobi',
-  'Kilifi',
-  'Web3',
-  'Music',
   'Culture',
-  'Unplugged',
-  'Builders',
+  'Music',
   'DJs',
-  'ETHSafari 2026',
+  'Entertainment',
+  'Africa',
 ];
 
 export default function MarqueeStrip() {

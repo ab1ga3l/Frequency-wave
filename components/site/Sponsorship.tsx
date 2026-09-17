@@ -54,7 +54,10 @@ export default function Sponsorship() {
                 product integration at the events themselves — demos,
                 activations and placements people actually touch.
               </p>
-              <a href="#contact" className="btn-primary mt-8">
+              <a
+                href="mailto:frequencywave101@gmail.com?subject=Partner%20with%20Frequency%20Wave"
+                className="btn-primary mt-8"
+              >
                 Become A Sponsor
               </a>
             </div>

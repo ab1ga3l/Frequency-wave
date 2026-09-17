@@ -28,7 +28,7 @@ export default function FounderQuote() {
               Grace Njura
             </span>
             <span className="mt-1 block text-xs uppercase text-white/40">
-              Founder, Frequency Wave · DJ Grace
+              Founder, Frequency Wave
             </span>
           </figcaption>
         </figure>

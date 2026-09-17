@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Reveal from './Reveal';
 import SectionHeading from './SectionHeading';
 import WaveBand from './WaveBand';
@@ -35,32 +34,20 @@ export default function UpcomingEvent({
           <SectionHeading
             accent="Upcoming"
             rest="Event"
-            subtitle="Frequency Wave Unplugged — 11 September 2026, Kilifi"
+            subtitle="The Wave Social — 10 October 2026, Jenga Jungle"
           />
         </Reveal>
 
         {event ? (
           <Reveal className="mt-10 sm:mt-14">
             <article className="grid overflow-hidden rounded-[28px] border border-cyan/30 bg-white/[0.06] backdrop-blur-md sm:rounded-[40px] lg:grid-cols-2">
-              <div className="relative aspect-[4/3] min-h-[220px] sm:min-h-[280px] lg:aspect-auto lg:min-h-[420px]">
+              <div className="relative flex min-h-[220px] items-center justify-center bg-[#040B24] p-3 sm:min-h-[280px] sm:p-5 lg:min-h-[420px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={event.coverImage ?? '/images/unplugged-poster.jpg'}
+                  src={event.coverImage ?? '/images/homepage.jpeg'}
                   alt={event.title}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="max-h-full w-full object-contain"
                 />
-                {event.registerUrl && (
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#040B24]/90 via-[#040B24]/35 to-transparent px-4 pb-4 pt-16 lg:hidden">
-                    <a
-                      href={event.registerUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary !w-auto"
-                    >
-                      RSVP on Luma
-                    </a>
-                  </div>
-                )}
               </div>
               <div className="flex flex-col justify-center p-5 sm:p-8">
                 <h3 className="font-display text-2xl font-bold italic text-white sm:text-3xl">
@@ -88,14 +75,11 @@ export default function UpcomingEvent({
                       href={event.registerUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary hidden lg:inline-flex"
+                      className="btn-primary"
                     >
-                      RSVP on Luma
+                      Event details
                     </a>
                   )}
-                  <Link href={`/events/${event.slug}`} className="btn-outline">
-                    Event details
-                  </Link>
                 </div>
               </div>
             </article>
@@ -124,12 +108,12 @@ export default function UpcomingEvent({
                     <span className="text-sm font-semibold uppercase text-white">
                       {p.title}
                     </span>
-                    <Link
+                    <a
                       href={`/events/${p.slug}`}
                       className="ml-auto text-xs font-semibold uppercase tracking-widest text-white/50 transition-colors hover:text-cyan"
                     >
                       View Recap &rarr;
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>

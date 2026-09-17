@@ -13,11 +13,11 @@ export type HeroEventCard = {
 };
 
 export default function HeroBand({ event }: { event: HeroEventCard | null }) {
-  const poster = event?.coverImage || '/images/unplugged-poster.jpg';
+  const poster = event?.coverImage || '/images/homepage.jpeg';
   const rsvpUrl = event?.registerUrl || UNPLUGGED_RSVP_URL;
   const posterAlt = event
     ? `${event.title} — ${event.dateRange}, ${event.venue}. Where Web3 meets music and culture.`
-    : 'Frequency Wave Unplugged — 11 September 2026, Kilifi, Kenya';
+    : 'Frequency Wave homepage image';
 
   return (
     <section
@@ -37,8 +37,7 @@ export default function HeroBand({ event }: { event: HeroEventCard | null }) {
             Awaken the Frequency.
           </p>
           <p className="hero-in hero-in-d4 mt-4 max-w-xl text-base font-medium leading-relaxed text-white/85 sm:text-lg">
-            Where Web3 meets music and culture — from Nairobi to Kilifi.
-            We don&apos;t just host events. We shift the frequency.
+            Curating immersive Web3 experiences through music, culture, and community.
           </p>
           <div className="hero-in hero-in-d5 mt-8 flex flex-wrap items-center gap-4">
             <Link href="/#events" className="btn-primary">
@@ -77,7 +76,7 @@ export default function HeroBand({ event }: { event: HeroEventCard | null }) {
                   rel="noopener noreferrer"
                   className="btn-primary !w-auto"
                 >
-                  RSVP on Luma
+                  RSVP
                 </a>
               </div>
             )}
