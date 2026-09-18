@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "frequency-wave",
+  "account_id": "7670267c0ac5570e24c9312daad43b96",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-18",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  "preview_urls": true,
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "frequency-wave"
+    }
+  ],
+  "routes": [
+    { "pattern": "frequencywave.dev", "custom_domain": true },
+    { "pattern": "www.frequencywave.dev", "custom_domain": true }
+  ],
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://frequencywave.dev",
+    "NEXT_PUBLIC_ELEVENLABS_AGENT_ID": "agent_4801kzvy9pnsfqsrca86bbp94m4d",
+    "CONTACT_TO_EMAIL": "frequencywave101@gmail.com"
+  }
+}

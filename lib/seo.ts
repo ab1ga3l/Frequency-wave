@@ -1,7 +1,7 @@
 /** Site URL, default copy, and JSON-LD helpers for public SEO. */
 
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://frequency-wave-nine.vercel.app'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://frequencywave.dev'
 ).replace(/\/$/, '');
 
 export const SITE_NAME = 'Frequency Wave';

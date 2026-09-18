@@ -152,7 +152,7 @@ export default function AiConcierge() {
     try {
       const res = await fetch('/api/elevenlabs/signed-url');
       if (res.ok) {
-        const data = await res.json();
+        const data = (await res.json()) as { signedUrl?: unknown };
         if (typeof data.signedUrl === 'string' && data.signedUrl) {
           return { signedUrl: data.signedUrl };
         }
