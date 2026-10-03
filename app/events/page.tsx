@@ -3,6 +3,7 @@ import Footer from '@/components/site/Footer';
 import Nav from '@/components/site/Nav';
 import SectionHeading from '@/components/site/SectionHeading';
 import { getUpcomingEvents, getPastEvents } from '@/lib/queries';
+import { eventRsvpUrl } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -57,9 +58,9 @@ export default async function EventsPage() {
                           <Link href={`/events/${event.slug}`} className="btn-outline">
                             View event
                           </Link>
-                          {event.registerUrl && (
+                          {eventRsvpUrl(event) && (
                             <a
-                              href={event.registerUrl}
+                              href={eventRsvpUrl(event)!}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="btn-primary"
