@@ -11,8 +11,10 @@ export const SITE_DESCRIPTION =
 export const DEFAULT_OG_IMAGE = '/images/fw-mark.png';
 export const SITE_EMAIL = 'frequencywave101@gmail.com';
 export const UNPLUGGED_RSVP_URL = 'https://apps.little.africa/events/324';
+export const WAVE_SOCIAL_RSVP_URL = 'https://luma.com/tnwllgcx';
 
 export function eventRsvpUrl(event: { slug: string; registerUrl?: string | null }) {
+  if (event.slug === 'the-wave-social') return WAVE_SOCIAL_RSVP_URL;
   if (event.registerUrl) return event.registerUrl;
   if (event.slug === 'ethsafari-2026') return UNPLUGGED_RSVP_URL;
   return null;

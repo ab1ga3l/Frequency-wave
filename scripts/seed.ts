@@ -32,7 +32,7 @@ async function main() {
       city: 'Nairobi',
       country: 'Kenya',
       capacity: 'Limited capacity',
-      registerUrl: 'https://apps.little.africa/events/324',
+      registerUrl: 'https://luma.com/tnwllgcx',
       coverImage: '/images/homepage.jpeg',
       tags: ['Social', 'Games', 'Music', 'Culture', 'DJs'],
       status: 'published',

@@ -75,7 +75,7 @@ export default async function Home() {
     venue: 'Jenga Jungle Restaurant',
     venueLine: 'Jenga Jungle Restaurant',
     startAtISO: '2026-10-10T16:00:00+03:00',
-    registerUrl: 'https://apps.little.africa/events/324',
+    registerUrl: 'https://luma.com/tnwllgcx',
     coverImage: '/images/homepage.jpeg',
   };
 
