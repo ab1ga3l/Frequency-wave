@@ -33,7 +33,7 @@ export default async function EventsPage() {
                       className="overflow-hidden rounded-[28px] border border-cyan/30 bg-white/[0.04]"
                     >
                       <img
-                        src={event.coverImage ?? '/images/homepage.jpeg'}
+                        src={event.coverImage ?? '/images/homepage-1080x1350.jpeg'}
                         alt={event.title}
                         className="h-56 w-full object-cover"
                       />

@@ -41,10 +41,10 @@ export default function UpcomingEvent({
         {event ? (
           <Reveal className="mt-10 sm:mt-14">
             <article className="grid overflow-hidden rounded-[28px] border border-cyan/30 bg-white/[0.06] backdrop-blur-md sm:rounded-[40px] lg:grid-cols-2">
-              <div className="relative flex min-h-[220px] items-center justify-center bg-[#040B24] p-3 sm:min-h-[280px] sm:p-5 lg:min-h-[420px]">
+              <div className="relative flex aspect-[4/5] min-h-[220px] items-center justify-center bg-[#040B24] p-3 sm:min-h-[280px] sm:p-5 lg:min-h-[420px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={event.coverImage ?? '/images/homepage.jpeg'}
+                  src={event.coverImage ?? '/images/homepage-1080x1350.jpeg'}
                   alt={event.title}
                   className="max-h-full w-full object-contain"
                 />

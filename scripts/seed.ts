@@ -33,7 +33,7 @@ async function main() {
       country: 'Kenya',
       capacity: 'Limited capacity',
       registerUrl: 'https://luma.com/tnwllgcx',
-      coverImage: '/images/homepage.jpeg',
+      coverImage: '/images/homepage-1080x1350.jpeg',
       tags: ['Social', 'Games', 'Music', 'Culture', 'DJs'],
       status: 'published',
       featured: true,

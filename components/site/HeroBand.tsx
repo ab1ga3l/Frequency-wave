@@ -13,7 +13,7 @@ export type HeroEventCard = {
 };
 
 export default function HeroBand({ event }: { event: HeroEventCard | null }) {
-  const poster = event?.coverImage || '/images/homepage.jpeg';
+  const poster = event?.coverImage || '/images/homepage-1080x1350.jpeg';
   const rsvpUrl = event?.registerUrl || UNPLUGGED_RSVP_URL;
   const posterAlt = event
     ? `${event.title} — ${event.dateRange}, ${event.venue}. Where Web3 meets music and culture.`
@@ -66,7 +66,7 @@ export default function HeroBand({ event }: { event: HeroEventCard | null }) {
             <img
               src={poster}
               alt={posterAlt}
-              className="aspect-square w-full object-cover"
+              className="aspect-[4/5] w-full bg-[#080f1d] object-contain"
             />
             {rsvpUrl && (
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#040B24]/90 via-[#040B24]/40 to-transparent px-4 pb-4 pt-16">

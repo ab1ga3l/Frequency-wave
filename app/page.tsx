@@ -76,7 +76,7 @@ export default async function Home() {
     venueLine: 'Jenga Jungle Restaurant',
     startAtISO: '2026-10-10T16:00:00+03:00',
     registerUrl: 'https://luma.com/tnwllgcx',
-    coverImage: '/images/homepage.jpeg',
+    coverImage: '/images/homepage-1080x1350.jpeg',
   };
 
   const pastWaves = past.map((e) => ({
